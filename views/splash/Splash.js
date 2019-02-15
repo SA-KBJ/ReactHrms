@@ -2,7 +2,9 @@ import React, { Component } from "react";
 import { Image,Text,View,StyleSheet } from "react-native";
 import CommonStyle from "../../style/comman";
 import CommonStrings from "../../config/string";
-import Constants from  "../../config/constants"
+import Constants from "../../config/constants";
+import { goToLogin, goToHome } from "../AppNavigator"
+import { Navigation } from 'react-native-navigation';
 
 export default class Splash extends Component {
   static navigationOptions = {
@@ -11,6 +13,7 @@ export default class Splash extends Component {
   constructor(props){
     super(props)
     this.state={
+      timeoutHandle:"",
       companyname: CommonStrings.company_name,
       Companyquate: CommonStrings.company_qoute
 
@@ -18,17 +21,21 @@ export default class Splash extends Component {
   }         
 
   componentDidMount() {
-    setTimeout(() => {
+    this.timeoutHandle = setTimeout(() => {
        this.load();
           }, 2000);
     }
 
+    componentWillUnmount(){
+      clearTimeout(this.timeoutHandle)
+    }
+
    load = () => {
-     if(Constants.isLoggeIn){
-   //   this.props.navigation.navigate('Home');
-     }else{
-    //  this.props.navigation.navigate('Auth');
-     }
+    if(Constants.isLoggeIn){
+      goToHome()
+    }else{
+      goToLogin()
+    }
       
     };
 
@@ -65,4 +72,26 @@ const Style = StyleSheet.create({
   },
 })
 
+ function navigateToHome(){
+  Navigation.setRoot({
+    root: {
+      sideMenu: {
+        left: {
+          component: {
+            name: 'hrms_drawercontainer',
+            passProps: {
+              text: 'This is a left side menu screen'
+            }
+          }
+        },
+        center: {
+          component: {
+            name: 'hrms_home'
+          },
+        },
+       
+      }
+    }
+  });
+}
 

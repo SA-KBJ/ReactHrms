@@ -8,17 +8,14 @@ import Tab from '../../config/navigations';
 
 
 class Profile extends React.Component{
-    static navigationOptions = {
-        drawerLabel: 'Profile'
-      }
+  
     render() {
         return (
             <View style={CommonStyle.container} >
                 <View style={styles.detailView}>
                     <Image source={{ uri: "https://www.t-nation.com/system/publishing/articles/10005529/original/6-Reasons-You-Should-Never-Open-a-Gym.png" }} style={styles.profileImg} />
                 </View>
-                <View style={styles.tabView}>
-                    <Tab />
+                            <View style={styles.tabView}>
                 </View>
             </View>
         );
