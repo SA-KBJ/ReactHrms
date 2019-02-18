@@ -5,6 +5,7 @@ import dimen from '../../config/dimen';
 import CommonStyle from "../../style/comman";
 import CircularActionButton from '../../customComponent/CircularActionButton';
 import ic_user from '../../assets/ic_user.svg'
+import Icon from "react-native-vector-icons/Ionicons";
 
 class Profile extends React.Component {
 
@@ -24,8 +25,23 @@ class Profile extends React.Component {
                     />
                     <Text style={styles.userText}>Bansari Patel(1yr 2m)</Text>
                     <Text style={styles.designationText}>Junior Software Engineer</Text>
+                   
+                    <View style= {styles.rowView}>
+                    <Icon
+                    name="md-person"
+                    color={colors.black}
+                    size={25}
+/>
                     <Text style={styles.userNoText}>SA-0165</Text>
+                    </View>
+                    <View style={styles.rowView}>
+                    <Icon
+                    name="md-water"
+                    color={colors.black}
+                    size={25}
+/>
                     <Text style={styles.bloodGroupText}>A+</Text>
+                    </View>
                 </View>
 
 
@@ -35,11 +51,22 @@ class Profile extends React.Component {
                     </View>
 
                     <View style={styles.rowView}>
+                   
+                    <Icon
+                    name="md-phone-portrait"
+                    color={colors.black}
+                    size={25}
+/>
                         <Text>999999999</Text>
                         <Text>999999999</Text>
                     </View>
 
                     <View style={styles.rowView}>
+                    <Icon
+                    name="md-home"
+                    color={colors.black}
+                    size={25}
+/>
                         <Text>A-28, Umiya Vijay Society, Opp. Shivranjani BRTS Bus Stand, Shivranjani, Ahmedabad - 380015</Text>
                     </View>
                 </View>
@@ -68,7 +95,6 @@ const styles = StyleSheet.create({
     },
     rowView: {
         flexDirection: 'row',
-        backgroundColor: colors.blueShade1,
 
     },
     userText: {
