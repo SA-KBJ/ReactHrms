@@ -11,7 +11,7 @@ function start(){
   Navigation.setRoot({
     root: {
       component: {
-        name: "hrms_splash"
+        name: "hrms_profile"
       }
       
     }
