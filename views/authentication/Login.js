@@ -5,6 +5,7 @@ import CommonStrings from "../../config/string";
 import { Input, Button } from 'react-native-elements'
 import dimen from '../../config/dimen'
 import colors from "../../config/colors";
+import {goToHome} from "../AppNavigator"
 
 export default class Login extends Component {
   static navigationOptions = {
@@ -16,7 +17,7 @@ export default class Login extends Component {
   
     headerTintColor: colors.colorPrimary,
     headerTitleStyle: {
-width:'90%',
+    width:'90%',
       fontWeight: 'bold',
       alignSelf:'center'
 
@@ -51,7 +52,7 @@ width:'90%',
     // } else if (this.state.password == '') {
     //   this.callAlert(Constants.alert_title, Constants.error_password)
     // } else {
-      this.navigateToHomePage()
+      goToHome()
    // }
   }
 
@@ -64,14 +65,7 @@ width:'90%',
       { cancelable: false }
     )
   }
-  navigateToHomePage = () => {
-    this.props.navigation.navigate('HomeScreen');
-  }
-  navigateToForgotPasswordPage = () => { 
-    this.props.navigation.navigate('ForgotPassword');
-  }
-
-  render() {
+   render() {
     return (
       <KeyboardAvoidingView style={CommonStyle.container}  behavior="padding" enabled>
       <View style={CommonStyle.container}>

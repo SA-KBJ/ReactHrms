@@ -1,18 +1,39 @@
 {
-  "name": "ReactHrms",
+  "name": "reacthrms",
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "start": "node node_modules/react-native/local-cli/cli.js start",
     "test": "jest",
-    "android": "react-native bundle --platform android --dev false --entry-file index.js --bundle-output android/app/src/main/assets/index.android.bundle --assets-dest android/app/src/main/res && cd ./android && ./gradlew app:assembleDebug && ./gradlew installDebug"
+    "android": "react-native bundle --platform android --dev false --entry-file index.js --bundle-output android/app/src/main/assets/index.android.bundle --assets-dest android/app/src/main/res && cd ./android && ./gradlew app:assembleDebug && ./gradlew installDebug",
+    "build": "rm -rf ./lib/dist && tsc",
+    "xcode": "open playground/ios/playground.xcodeproj",
+    "install-android": "node ./scripts/install-android",
+    "uninstall-android": "cd playground/android && ./gradlew uninstallAll",
+    "clean": "node ./scripts/clean",
+    "prestart": "npm run build",
+    "start": "node ./scripts/start",
+    "pretest-js": "npm run build",
+    "test-js": "node ./scripts/test-js",
+    "test-unit-ios": "node ./scripts/test-unit --ios",
+    "test-unit-android": "node ./scripts/test-unit --android",
+    "pretest-e2e-android": "npm run build",
+    "test-e2e-android": "node ./scripts/test-e2e --android",
+    "pretest-e2e-ios": "npm run build",
+    "test-e2e-ios": "node ./scripts/test-e2e --ios",
+    "test-e2e-ios-multi": "npm run test-e2e-ios -- --multi",
+    "test-all": "node ./scripts/test-all",
+    "prerelease": "npm run build",
+    "release": "node ./scripts/release",
+    "local-docs": "node ./scripts/local-docs",
+    "gen-docs": "ts-node ./scripts/gen-docs/Main"
   },
   "dependencies": {
     "react": "16.6.3",
     "react-native": "0.58.4",
+    "react-native-debugger": "^1.1.0",
     "react-native-elements": "^1.0.0",
     "react-native-modal": "^7.0.2",
-    "react-native-navigation": "^2.11.0",
+    "react-native-navigation": "^2.8.0",
     "react-native-tab-view": "^1.3.2",
     "react-native-vector-icons": "^6.3.0"
   },
@@ -25,5 +46,17 @@
   },
   "jest": {
     "preset": "react-native"
-  }
+  },
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SA-KBJ/ReactHrms.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/SA-KBJ/ReactHrms/issues"
+  },
+  "homepage": "https://github.com/SA-KBJ/ReactHrms#readme",
+  "description": ""
 }
