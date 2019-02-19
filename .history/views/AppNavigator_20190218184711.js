@@ -48,8 +48,8 @@ export const goToHome = () => {
             },
             children: [{
               component: {
-                id: "hrms_newleave",
-                name: 'hrms_newleave',
+                id: "hrms_home",
+                name: 'hrms_home',
               },
 
             }]
@@ -129,7 +129,7 @@ export const goToNewLeave = () => {
         },
         center: {
           component: {
-            name: 'hrms_newleave'
+            name: 'hrms_home'
           },
         },
 

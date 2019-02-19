@@ -3,7 +3,7 @@ import { Image,Text,View,StyleSheet } from "react-native";
 import CommonStyle from "../../style/comman";
 import CommonStrings from "../../config/string";
 import Constants from "../../config/constants";
-import { goToLogin, goToHome,goToNewLeave } from "../AppNavigator"
+import { goToLogin, goToHome } from "../AppNavigator"
 import { Navigation } from 'react-native-navigation';
 
 export default class Splash extends Component {
@@ -34,7 +34,7 @@ export default class Splash extends Component {
     if(Constants.isLoggeIn){
       goToHome()
     }else{
-      goToHome()
+      goToLogin()
     }
       
     };

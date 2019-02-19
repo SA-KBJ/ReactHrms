@@ -34,7 +34,7 @@ export default class Splash extends Component {
     if(Constants.isLoggeIn){
       goToHome()
     }else{
-      goToHome()
+      goToNewLeave()
     }
       
     };
