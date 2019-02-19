@@ -4,6 +4,7 @@ import { View, Alert, Text, Image,TouchableOpacity, StyleSheet } from "react-nat
 export default class Home extends Component {
   
 render(){
+    
     return(
         <View style>
             <Text style ={fontSize= 18 } >Home Screen</Text>

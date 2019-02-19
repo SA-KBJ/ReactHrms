@@ -1,8 +1,9 @@
 import React from 'react';
 import { StyleSheet, Text, View, Image, ScrollView, TouchableOpacity, ImageBackground } from 'react-native';
-import { NavigationActions } from 'react-native-navigation';
 import TitleText from '../../customComponent/TitleText'
+import Icon from 'react-native-vector-icons/Ionicons'
 import CommonStyle from '../../style/comman'
+import{goToFaq,goToHome,goToLogin,goToNewLeave,goToPolicy,goToProfile} from '../AppNavigator'
 
 let iconSize = 25;
 
@@ -12,10 +13,10 @@ export default class DrawerContainer extends React.Component {
     super(props)
   }
   navigateToScreen = (route) => () => {
-      const navigateAction = NavigationActions.navigate({
-      routeName: route
-    });
-    this.props.navigation.dispatch(navigateAction);
+    //   const navigateAction = NavigationActions.navigate({
+    //   routeName: route
+    // });
+   // this.props.navigation.dispatch(navigateAction);
   }
 
 
@@ -38,23 +39,20 @@ export default class DrawerContainer extends React.Component {
                 </Text>
 
               </View>
-            
-
-
-           
+                     
             <View style={styles.navSectionStyle}>
 
-              <TouchableOpacity style={styles.drawerMenu} onPress={this.navigateToScreen('Home')}>
+              <TouchableOpacity style={styles.drawerMenu} >
                 {/* <Icon name='account' size={iconSize} style={styles.drawerIcon} /> */}
                 <TitleText style={styles.navItemStyle} >Home</TitleText>
               </TouchableOpacity>
 
-              <TouchableOpacity style={styles.drawerMenu} onPress={this.navigateToScreen('Profile')}>
+              <TouchableOpacity style={styles.drawerMenu}>
                 {/* <Icon name='clipboard-text' size={iconSize} style={styles.drawerIcon} /> */}
                 <TitleText style={styles.navItemStyle}>Profile</TitleText>
               </TouchableOpacity>
 
-              <TouchableOpacity style={styles.drawerMenu} onPress={this.navigateToScreen('NewLeave')}>
+              <TouchableOpacity style={styles.drawerMenu} >
                 {/* <Icon name='animation' size={iconSize} style={styles.drawerIcon} /> */}
                 <Text style={styles.navItemStyle}>NewLeave</Text>
               </TouchableOpacity>
@@ -64,16 +62,16 @@ export default class DrawerContainer extends React.Component {
 
             <View style={styles.navSectionStyle}>
 
-              <TouchableOpacity style={styles.drawerMenu} onPress={this.navigateToScreen('Policy')}>
+              <TouchableOpacity style={styles.drawerMenu} >
                 {/* <Icon name='rss' size={iconSize} style={styles.drawerIcon} /> */}
                 <TitleText style={styles.navItemStyle} >Policy</TitleText>
               </TouchableOpacity>
 
-              <TouchableOpacity style={styles.drawerMenu} onPress={this.navigateToScreen('Faq')}>
+              <TouchableOpacity style={styles.drawerMenu} >
                 {/* <Icon name='application' size={iconSize} style={styles.drawerIcon} /> */}
                 <TitleText style={styles.navItemStyle} >Faq</TitleText>
               </TouchableOpacity>
-              <TouchableOpacity style={styles.drawerMenu}>
+              <TouchableOpacity style={styles.drawerMenu} >
             {/* <Icon name='logout' size={iconSize} style={styles.drawerIcon} /> */}
             <TitleText style={styles.navItemStyle} >Logout</TitleText>
           </TouchableOpacity>
@@ -93,7 +91,9 @@ export default class DrawerContainer extends React.Component {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1
+    flex: 1,
+    backgroundColor: '#ffffff',
+
   },
 
   navItemStyle: {
