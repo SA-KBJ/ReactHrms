@@ -32,7 +32,7 @@ export default class Splash extends Component {
 
    load = () => {
     if(Constants.isLoggeIn){
-      goToHome()
+      goToRootScren("hrms_home","Home")
     }else{
       goToLogin()
     }

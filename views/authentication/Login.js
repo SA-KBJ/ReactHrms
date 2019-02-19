@@ -5,7 +5,7 @@ import CommonStrings from "../../config/string";
 import { Input, Button } from 'react-native-elements'
 import dimen from '../../config/dimen'
 import colors from "../../config/colors";
-import {goToHome} from "../AppNavigator"
+import {goToHome,goToRootScreen} from "../AppNavigator"
 
 export default class Login extends Component {
   static navigationOptions = {
@@ -52,7 +52,7 @@ export default class Login extends Component {
     // } else if (this.state.password == '') {
     //   this.callAlert(Constants.alert_title, Constants.error_password)
     // } else {
-      goToHome()
+      goToRootScreen("hrms_home","Home")
    // }
   }
 

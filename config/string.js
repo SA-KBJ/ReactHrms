@@ -2,6 +2,19 @@ export default appString = {
   dsLogo: "Please eneter user name",
   isLoggedIn: false,
 
+  //screen names
+  screen_splash :"hrms_splash",
+  screen_home :"hrms_home",
+  screen_login :"hrms_login",
+  screen_forgotpassword :"hrms_forgotpassword",
+  screen_signup :"hrms_signup",
+  screen_policy :"hrms_policy",
+  screen_myleave :"hrms_myleave",
+  screen_leave_detail :"hrms_leave_detail",
+  screen_profile :"hrms_profile",
+  screen_faq :"hrms_faq",
+  screen_newleave :"hrms_newleave",
+  screen_drawer_container :"hrms_drawercontainer",
 
   // Leave String
   lable_Multiple_leave: "Want to apply for Multiple Days Leaves?",
