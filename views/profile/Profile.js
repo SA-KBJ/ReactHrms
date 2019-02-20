@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View, Image, ScrollView } from 'react-native';
+import { StyleSheet, Text, View, Image, ScrollView, TouchableOpacity } from 'react-native';
 import colors from '../../config/colors';
 import dimen from '../../config/dimen';
 import CircularActionButton from '../../customComponent/CircularActionButton';
@@ -24,8 +24,8 @@ class Profile extends React.Component {
                 <Text style={styles.designationText}>Junior Software Engineer</Text>
 
 
-                <ScrollView contentContainerStyle={flex=1}>
-                    <View>
+                <ScrollView contentContainerStyle={flex = 1} style={styles.scrollView}>
+                    <View style={flex = 1}>
 
                         <View style={styles.rowView}>
                             <View style={styles.innerRowView}>
@@ -111,15 +111,17 @@ class Profile extends React.Component {
                             </View>
                             <Text>aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</Text>
                         </View>
-                        <CircularActionButton
-                            buttonColor="rgba(231,76,60,1)"
-                            onPress={() => { console.log("hi") }}
-                        />
-                        
+
+
                     </View>
 
                 </ScrollView>
-              
+                <TouchableOpacity style={styles.TouchableOpacityStyle}>
+                    <CircularActionButton
+                        buttonColor="rgba(231,76,60,1)"
+                        onPress={() => { console.log("hi") }}
+                    />
+                </TouchableOpacity>
             </View>
 
 
@@ -132,6 +134,19 @@ const styles = StyleSheet.create({
         flex: 1,
         flexDirection: 'column',
     },
+    scrollView: {
+        marginBottom: dimen.marginMedium
+    },
+    TouchableOpacityStyle:{
+  
+        position: 'absolute',
+        width: 50,
+        height: 50,
+        alignItems: 'center',
+        justifyContent: 'center',
+        right: 30,
+        bottom: 30,
+      },
     profileView: {
         height: '20%',
         backgroundColor: colors.colorPrimary,
