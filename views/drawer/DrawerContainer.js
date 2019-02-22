@@ -4,16 +4,45 @@ import TitleText from '../../customComponent/TitleText'
 import Icon from 'react-native-vector-icons/Ionicons'
 import CommonStyle from '../../style/comman'
 import{goToRootScreen} from '../AppNavigator'
-
+import{Navigation} from 'react-native-navigation'
+import strings from "../../config/string"
 let iconSize = 25;
 
 export default class DrawerContainer extends React.Component {
 
   constructor(props) {
     super(props)
+    Navigation.events().bindComponent(this);
+    console.log("this.props.text,"+this.props.text);
+  }
+
+ 
+  componentDidAppear() {
+    this.props.isSideDrawerVisible = false;
+  }
+  componentDidDisappear() {
+    this.props.isSideDrawerVisible = true;
   }
   navigateToScreen = (routename,title) => () => {
-    goToRootScreen(routename,title)
+    (!this.props.isSideDrawerVisible) ? this.props.isSideDrawerVisible = true : this.props.isSideDrawerVisible = false
+
+    Navigation.mergeOptions(this.props.componentId, {
+      sideMenu: {
+        'left': {
+          //visible: this.props.isSideDrawerVisible
+        }
+      }
+    });
+
+    Navigation.setStackRoot('navigation_stack', {
+      component: {
+        name: routename,
+        passProps: {
+          isSideDrawerVisible: this.props.isSideDrawerVisible
+        }
+      }
+    });
+  //  goToRootScreen(routename,title)
   }
 
 
@@ -37,17 +66,17 @@ export default class DrawerContainer extends React.Component {
               </View>
                      
             <View style={styles.navSectionStyle}>
-            <TouchableOpacity style={styles.drawerMenu} onPress={this.navigateToScreen("hrms_signup","Register Employee")} >
+            <TouchableOpacity style={styles.drawerMenu} onPress={this.navigateToScreen(strings.screen_signup,"Register Employee")} >
                 {/* <Icon name='account' size={iconSize} style={styles.drawerIcon} /> */}
                 <TitleText style={styles.navItemStyle} >Register Employee</TitleText>
               </TouchableOpacity>
 
-              <TouchableOpacity style={styles.drawerMenu} onPress={this.navigateToScreen("hrms_home","Home")} >
+              <TouchableOpacity style={styles.drawerMenu} onPress={this.navigateToScreen(strings.screen_home,"Home")} >
                 {/* <Icon name='account' size={iconSize} style={styles.drawerIcon} /> */}
                 <TitleText style={styles.navItemStyle} >Home</TitleText>
               </TouchableOpacity>
 
-              <TouchableOpacity style={styles.drawerMenu} onPress={this.navigateToScreen("hrms_profile","Profile")}>
+              <TouchableOpacity style={styles.drawerMenu} onPress={this.navigateToScreen(strings.screen_profile,"Profile")}>
                 {/* <Icon name='clipboard-text' size={iconSize} style={styles.drawerIcon} /> */}
                 <TitleText style={styles.navItemStyle}>Profile</TitleText>
               </TouchableOpacity>
