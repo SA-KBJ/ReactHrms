@@ -6,10 +6,9 @@ import {startSplash} from './views/AppNavigator'
 
 function start(){
   registerScreens()
-   Navigation.events().registerAppLaunchedListener(() => {
+  Navigation.events().registerAppLaunchedListener(() => {
     startSplash();
 })
- 
 
 }
 module.exports={

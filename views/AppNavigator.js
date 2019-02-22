@@ -52,6 +52,7 @@ export const goToRootScreen = (screenname,screenTitle)=>{
         },
         center: {
           stack
+      
         },
       }
     }
@@ -76,6 +77,7 @@ export function startSplash(){
         id: strings.screen_splash,
         name: strings.screen_splash
     }
+
     }
   });
 }

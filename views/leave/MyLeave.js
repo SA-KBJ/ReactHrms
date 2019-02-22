@@ -23,6 +23,7 @@ import IconMaterialCommunity from "react-native-vector-icons/MaterialCommunityIc
 
 import Modal from "react-native-modal";
 import CustomDatePicker from "../../customComponent/CustomDatePicker"
+import comman from '../../style/comman'
 
 export default class MyLeave extends React.Component {
     constructor(props) {
@@ -95,7 +96,7 @@ export default class MyLeave extends React.Component {
     rowItem = (item, index) => {
         return (
             <TouchableWithoutFeedback onPress={() => this.leaveItemSelect(item, index)}>
-                <View style={styles.rowMainContainer}>
+                <View style={comman.rowMainContainer}>
                     <View style={styles.innerRowContainer}>
                         <IconFontAwesome color={colors.date_icon} name="calendar" size={20} />
                         <Text style={styles.rowText}>{item.date}</Text>
@@ -297,15 +298,15 @@ const styles = StyleSheet.create({
     buttonShowFilter: {
         backgroundColor: colors.colorPrimary
     },
-    rowMainContainer: {
-        padding: dimen.marginSmall,
-        marginBottom: dimen.marginSmall,
-        backgroundColor: colors.white,
-        borderWidth: 1,
-        borderColor: colors.textValueGray,
-        borderRadius: 4,
-        elevation: 3
-    },
+    // rowMainContainer: {
+    //     padding: dimen.marginSmall,
+    //     marginBottom: dimen.marginSmall,
+    //     backgroundColor: colors.white,
+    //     borderWidth: 1,
+    //     borderColor: colors.textValueGray,
+    //     borderRadius: 4,
+    //     elevation: 3
+    // },
     innerRowContainer: {
         flexDirection: "row"
     },

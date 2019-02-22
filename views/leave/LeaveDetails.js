@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, FlatList } from 'react-native';
+import { StyleSheet, Text, View, FlatList, TouchableWithoutFeedback } from 'react-native';
 import colors from '../../config/colors'
 import strings from '../../config/string'
 import dimen from '../../config/dimen'
@@ -12,6 +12,7 @@ import ActionButton from '../../customComponent/ActionButton'
 import comman from '../../style/comman'
 import IconOcticons from "react-native-vector-icons/Octicons";
 import IconMaterialIcons from "react-native-vector-icons/MaterialIcons";
+import IconMaterialComIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import Modal from "react-native-modal";
 
 export default class LeaveDetails extends React.Component {
@@ -21,7 +22,9 @@ export default class LeaveDetails extends React.Component {
         this.state = {
             leaveDetails: {
                 isMultipleLeave: true,
+                leaveBalance: 2,
                 isCommentModalVisible: false,
+                isLeaveDetailModelVisible: true,
                 date: { startDate: "20/1/2019", endDate: "25/1/2019" },
                 commentText: "",
                 reason: "Would like to attain marriage of best friend.",
@@ -32,9 +35,15 @@ export default class LeaveDetails extends React.Component {
                     { "id": 3, "comment": "Ankit Thakkar has approve leave(s)", "time": "2 week Ago", "startData": "26/1/2019", "endData": "26/1/2019", "reason": "" },
                     { "id": 4, "comment": "Ankit Thakkar has approve leave(s)", "time": "2 week Ago", "startData": "26/1/2019", "endData": "26/1/2019", "reason": "" },
                 ],
+                leaveList: [
+                    { "id": 1, "date": "20/1/2019", "status": "Approved" },
+                    { "id": 2, "date": "20/1/2019", "status": "Approved" },
+
+                ]
             }
         }
     }
+
 
     commentLayout = (item) => {
         console.log("item " + item.comment)
@@ -71,6 +80,67 @@ export default class LeaveDetails extends React.Component {
             </View>
         )
     }
+    cancleAllLeave = () => {
+        console.log("Cancle All Leave");
+    }
+    cancleSpecificLeave = (id) => {
+        console.log("cancleSpecificLeave" +id);
+    }
+
+    rowItem = (item, index) => {
+        return (
+            <TouchableWithoutFeedback>
+                <View style={styles.cancleLeaveRow}>
+                    <TitleText style={{ fontSize: dimen.textMedium }} >
+                        {item.date}
+                    </TitleText>
+                    <ValueText style={{ marginTop: dimen.marginMedium }} >{item.status}</ValueText>
+                    <ValueText style={{ paddingTop: dimen.marginTiny, color: colors.colorPrimary }}  onPress={() => { this.cancleSpecificLeave(item.id) }}>Cancle this leave</ValueText>
+                </View>
+            </TouchableWithoutFeedback>
+        );
+    };
+    changeLeaveDetailModalStatus = () => {
+        this.setState({ isLeaveDetailModelVisible: !this.state.isLeaveDetailModelVisible })
+    }
+
+
+    leaveDetailLayout = () => {
+        return (
+            <Modal isVisible={this.state.isLeaveDetailModelVisible}
+                onSwipe={() => this.changeLeaveDetailModalStatus()}
+                onSwipeThreshold={200}
+                swipeDirection='down'
+
+                onBackButtonPress={() => this.changeLeaveDetailModalStatus()}>
+
+                <View style={[comman.modalContent]}>
+                    <TitleText style={styles.leaveDetailText} >{strings.lable_leave_detail + " (" + this.state.leaveDetails.leaveBalance + ")"}</TitleText>
+                    <Button type="clear"
+                        icon={
+                            <IconMaterialComIcons
+                                name="cancel"
+                                size={25}
+                                color={colors.black}
+                            />
+                        }
+                        titleStyle={styles.btnTitleLeaveCancle}
+                        title="Cancle All"
+                        buttonStyle={styles.btnCancleLeave}
+                        onPress={() => { this.cancleAllLeave() }}
+                    />
+
+                    <FlatList
+                        data={this.state.leaveDetails.leaveList}
+                        keyExtractor={item => item.id.toString()}
+                        renderItem={({ item, index }) => this.rowItem(item, index)}
+                    />
+                </View>
+
+            </Modal>
+        )
+    }
+
     modifyLeave = () => { console.log("Modify Leave") }
     doNothing = () => { console.log("doNothing click") }
     changeCommentModalStatus = () => {
@@ -111,7 +181,7 @@ export default class LeaveDetails extends React.Component {
                         <TitleText>Multiple Days Leaves?</TitleText>
                         <ValueText>{leaveDetail.isMultipleLeave ? "Yes" : "No"}</ValueText>
                     </View>
-                    <Text style={styles.leaveDetails}>Leave Details</Text>
+                    <Text style={styles.leaveDetails} onPress={() => { this.changeLeaveDetailModalStatus() }} >Leave Details</Text>
                 </View>
 
 
@@ -132,11 +202,11 @@ export default class LeaveDetails extends React.Component {
                         title={strings.lable_modify}
                         onPress={() => { this.modifyLeave() }}
                     />
-                    <Button
+                    {/* <Button
                         buttonStyle={styles.buttonDoNothing}
                         title={strings.lable_do_nothing}
                         onPress={() => { this.doNothing() }}
-                    />
+                    /> */}
                 </View>
 
                 <View style={styles.commentContainer}>
@@ -151,6 +221,7 @@ export default class LeaveDetails extends React.Component {
                     />
                 </View>
                 {this.addCommentLayout()}
+                {this.leaveDetailLayout()}
 
             </View>
         )
@@ -169,7 +240,7 @@ const styles = StyleSheet.create({
     buttonContainer: {
         flexDirection: 'row',
         // width: "%100",
-        justifyContent:'flex-end',
+        justifyContent: 'flex-end',
         marginTop: dimen.marginMedium,
         // width: "%100"
     },
@@ -222,9 +293,27 @@ const styles = StyleSheet.create({
         color: colors.colorPrimary,
         // borderColor:colors.borderColor,
         borderRadius: 1,
-        elevation:1,
-        fontWeight:'bold',
+        elevation: 1,
+        fontWeight: 'bold',
         padding: dimen.paddingTiny
+    },
+    btnCancleLeave: {
+        // color: colors.colorPrimary,
+        // backgroundColor:colors.black,
+        justifyContent: 'flex-start'
+    },
+    btnTitleLeaveCancle: {
+        color: colors.colorPrimary,
+        marginLeft: dimen.marginMedium
+    },
+    leaveDetailText: {
+        fontWeight: 'bold',
+        fontSize: dimen.textMedium
+    },
+    cancleLeaveRow: {
+        ...comman.rowMainContainer,
+        marginLeft: dimen.marginMedium,
+        marginRight: dimen.marginSmall
     }
 
 })
