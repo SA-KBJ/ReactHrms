@@ -49,7 +49,7 @@ export const goToHome = () => {
             children: [{
               component: {
                 id: "hrms_newleave",
-                name: 'hrms_newleave',
+                name: 'hrms_home',
               },
 
             }]

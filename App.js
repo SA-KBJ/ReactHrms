@@ -13,7 +13,6 @@ function start(){
       component: {
         name: "hrms_splash"
       }
-      
     }
   });
 

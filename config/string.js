@@ -26,6 +26,7 @@ export default appString = {
   lable_reset: "Reset",
   lable_modify:"Modify",
   lable_add_comment:"Comment",
+  lable_leave_detail:"Leave Detail",
 
   place_holder_enter_comment:"Please enter comment",
   place_holder_reason: 'Would like to attend marriage funcation of friend',
