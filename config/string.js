@@ -53,5 +53,14 @@ export default appString = {
   action_login: "LOGIN",
   str_forgotpassword: "Forgot password?",
   company_name: "Solution Anlalysts",
-  company_qoute: "Analysing needs,delivering solutions"
+  company_qoute: "Analysing needs,delivering solutions",
+
+
+
+  //profile
+  label_personal:"PERSONAL",
+  label_company:"COMPANY",
+  label_exprience:"EXPERIENCES",
+  label_other:"OTHER",
+  label_family:"FAMILY"
 };

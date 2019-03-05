@@ -36,6 +36,7 @@
     "react-native-debugger": "^1.1.0",
     "react-native-divider": "^1.0.3",
     "react-native-elements": "^1.0.0",
+    "react-native-floating-action": "^1.14.2",
     "react-native-modal": "^7.0.2",
     "react-native-navigation": "^2.8.0",
     "react-native-svg-image": "^2.0.1",

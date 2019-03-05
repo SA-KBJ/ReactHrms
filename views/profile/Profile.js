@@ -2,9 +2,10 @@ import React, { Component } from 'react';
 import { StyleSheet, Text, View, Image, ScrollView, TouchableOpacity } from 'react-native';
 import colors from '../../config/colors';
 import dimen from '../../config/dimen';
-import CircularActionButton from '../../customComponent/CircularActionButton';
+import string from '../../config/string';
 import Icon from "react-native-vector-icons/Ionicons";
 import IconFontAwesome from "react-native-vector-icons/FontAwesome";
+import { FloatingAction } from 'react-native-floating-action';
 
 class Profile extends React.Component {
 
@@ -116,18 +117,55 @@ class Profile extends React.Component {
                     </View>
 
                 </ScrollView>
-                <TouchableOpacity style={styles.TouchableOpacityStyle}>
-                    <CircularActionButton
-                        buttonColor="rgba(231,76,60,1)"
-                        onPress={() => { console.log("hi") }}
-                    />
-                </TouchableOpacity>
+            
+                <FloatingAction
+                    actions={actions}
+                    color={colors.colorPrimary}
+                />
             </View>
 
 
         );
     }
 }
+const actions = [{
+    text: string.label_personal,
+    name: string.label_personal,
+    icon: require('./../../assets/user.png'),
+    position: 1,
+    color:colors.colorPrimary,
+    size:30
+  }, {
+    text: string.label_company,
+    name: string.label_company,
+    icon: require('./../../assets/company.png'),
+    position: 2,
+    color:colors.colorPrimary
+
+  }, {
+    text: string.label_exprience,
+    name: string.label_exprience,
+    icon: require('./../../assets/exprience.png'),
+    position: 3,
+    color:colors.colorPrimary
+
+  }, {
+    text: string.label_other,
+    name: string.label_other,
+    icon: require('./../../assets/other.png'),
+    position: 4,
+    color:colors.colorPrimary
+
+  },
+  {
+    text: string.label_family,
+    name: string.label_family,
+    icon: require('./../../assets/family.png'),
+    position: 5,
+    color:colors.colorPrimary
+
+  }];
+
 
 const styles = StyleSheet.create({
     container: {
@@ -137,16 +175,9 @@ const styles = StyleSheet.create({
     scrollView: {
         marginBottom: dimen.marginMedium
     },
-    TouchableOpacityStyle:{
-  
-        position: 'absolute',
-        width: 50,
-        height: 50,
-        alignItems: 'center',
-        justifyContent: 'center',
-        right: 30,
-        bottom: 30,
-      },
+    floatingActionButton: {
+        color:colors.colorPrimary
+    },
     profileView: {
         height: '20%',
         backgroundColor: colors.colorPrimary,
