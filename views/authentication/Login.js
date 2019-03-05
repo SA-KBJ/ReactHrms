@@ -5,13 +5,13 @@ import CommonStrings from "../../config/string";
 import { Input, Button } from 'react-native-elements'
 import dimen from '../../config/dimen'
 import colors from "../../config/colors";
-import {goToHome,goToRootScreen} from "../AppNavigator"
+import {goToRootScreen} from "../AppNavigator"
+import {validate} from "../../utility/validation";
 
 export default class Login extends Component {
   static navigationOptions = {
     title: 'Login',
-   
-    headerStyle: {
+      headerStyle: {
       backgroundColor: '#ffffff',
     },
   
@@ -25,14 +25,26 @@ export default class Login extends Component {
   };
   constructor(props) {
     super(props)
-    this.state = {
-      email: '',
-      password: '',
-      welcomeText: CommonStrings.str_welcome,
-      pmsCredentials: CommonStrings.str_credentials,
-      forgotPw: CommonStrings.str_forgotpassword
+
+   this.state = {
+      controls: {
+        email: {
+          value: "",
+          valid: false,
+          validationRules: {
+            isEmail: true
+          }
+        },
+        password: {
+          value: "",
+          valid: false,
+          validationRules: {
+            minLength: 6
+          }
+        },
+       },
     }
-  }
+}
 
   componentDidMount() {
     //this method call when page visible to user
@@ -46,15 +58,9 @@ export default class Login extends Component {
   setPassword(password) {
     this.setState({ password })
   }
-  validateData = () => {
-    // if (this.state.email == '') {
-    //   this.callAlert(Constants.alert_title, Constants.error_email)
-    // } else if (this.state.password == '') {
-    //   this.callAlert(Constants.alert_title, Constants.error_password)
-    // } else {
-      goToRootScreen("hrms_home","Home")
-   // }
-  }
+  startDrawerScreen = () => {
+         goToRootScreen(CommonStrings.screen_home,"Home")
+    }
 
   callAlert(title, message, func) {
     Alert.alert(
@@ -72,21 +78,49 @@ export default class Login extends Component {
 
         <Image source={require('../../assets/ic_salogo.png')} style={CommonStyle.image} />
         <View style={CommonStyle.verticalView}>
-          <Text style={styles.titleText}>{this.state.welcomeText}</Text>
-          <Text style={styles.smallText}>{this.state.pmsCredentials}</Text>
-          <Input containerStyle={styles.inputContainer} inputStyle={styles.input} placeholder="Email" onChangeText={(text) => this.setEmail(text)} />
-          <Input containerStyle={styles.inputContainer} inputStyle={styles.input} placeholder="Password" onChangeText={(text) => this.setPassword(text)} />
+          <Text style={styles.titleText}>{CommonStrings.str_welcome}</Text>
+          <Text style={styles.smallText}>{CommonStrings.str_credentials}</Text>
+          <Input containerStyle={styles.inputContainer} inputStyle={styles.input} placeholder="Email" value={this.state.controls.email.value} onChangeText={val => this.validateUserInput("email",val)} />
+          <Input containerStyle={styles.inputContainer} inputStyle={styles.input} placeholder="Password" value={this.state.controls.password.value} onChangeText={val => this.validateUserInput("password",val)} />
          <View style = {CommonStyle.horizontalView}>
          
-         <Button buttonStyle={styles.buttonStyle} title={CommonStrings.action_login} onPress={this.validateData} />
+         <Button buttonStyle={styles.buttonStyle} title={CommonStrings.action_login} onPress={this.startDrawerScreen} />
          </View>
-       
-          <Text style={styles.forgotStyle} onPress ={this.navigateToForgotPasswordPage}>{this.state.forgotPw}</Text>
+          <Text style={styles.forgotStyle} onPress ={this.navigateToForgotPasswordPage}>{CommonStrings.str_forgotpassword}</Text>
         </View>
       </View>
       </KeyboardAvoidingView>
     );
   }
+}
+
+validateUserInput=(key,value)=>{
+  let connectedValue = {};
+  if (this.state.controls[key].validationRules.equalTo) {
+    const equalControl = this.state.controls[key].validationRules.equalTo;
+    const equalValue = this.state.controls[equalControl].value;
+    connectedValue = {
+      ...connectedValue,
+      equalTo: equalValue
+    };
+  }
+
+  this.setState(prevState => {
+    return {
+      controls: {
+        ...prevState.controls,
+         [key]: {
+          ...prevState.controls[key],
+          value: value,
+          valid: validate(
+            value,
+            prevState.controls[key].validationRules,
+            connectedValue
+          )
+        }
+      }
+    };
+  });
 }
 
 const styles = StyleSheet.create({
