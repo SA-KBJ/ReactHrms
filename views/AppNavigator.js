@@ -158,6 +158,25 @@ export const goToProfile = () => {
       }
     }
   });
+
+
+}
+
+export const goToPersonal = () => {
+  Navigation.mergeOptions('profilestack', {
+    topBar: {
+      title: {
+        text: "Personal"
+      }
+
+    }
+  });
+  Navigation.push('profilestack', {
+    component: {
+      name: "Personal"
+    }
+
+  });
 }
 
 

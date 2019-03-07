@@ -6,7 +6,7 @@ import string from '../../config/string';
 import Icon from "react-native-vector-icons/Ionicons";
 import IconFontAwesome from "react-native-vector-icons/FontAwesome";
 import { FloatingAction } from 'react-native-floating-action';
-
+import goToPersonal from '../AppNavigator';
 class Profile extends React.Component {
 
     render() {
@@ -121,6 +121,11 @@ class Profile extends React.Component {
                 <FloatingAction
                     actions={actions}
                     color={colors.colorPrimary}
+                    onPressItem={
+                        (name) => {
+                          console.log(`selected button: ${name}`);
+                        }
+                    }
                 />
             </View>
 
@@ -134,7 +139,6 @@ const actions = [{
     icon: require('./../../assets/user.png'),
     position: 1,
     color:colors.colorPrimary,
-    size:30
   }, {
     text: string.label_company,
     name: string.label_company,
