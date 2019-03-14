@@ -167,8 +167,6 @@ const styles = StyleSheet.create({
 
   navItemStyle: {
     flex:1,
-    alignItems:'center',
-    justifyContent:'center',
     marginLeft: 15,
   },
   navSectionStyle: {
@@ -176,7 +174,6 @@ const styles = StyleSheet.create({
   },
 
   drawerIcon: {
-
     color: "#000000",
     marginRight:5
   },
