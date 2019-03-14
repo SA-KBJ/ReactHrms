@@ -1,123 +1,163 @@
 import React from 'react';
-import { StyleSheet, Text, View, Image, ScrollView, TouchableOpacity, ImageBackground } from 'react-native';
+import { StyleSheet, Text,ToastAndroid, View, AsyncStorage, ScrollView, TouchableOpacity,alert, ImageBackground } from 'react-native';
 import TitleText from '../../customComponent/TitleText'
-import Icon from 'react-native-vector-icons/Ionicons'
-import CommonStyle from '../../style/comman'
-import{goToRootScreen} from '../AppNavigator'
-import{Navigation} from 'react-native-navigation'
+import { Navigation } from 'react-native-navigation'
 import strings from "../../config/string"
+import Icon from "react-native-vector-icons/Ionicons";
+import {goToLogin} from "../AppNavigator"
+import CommonStyle from "../../style/comman";
+
 let iconSize = 25;
 
 export default class DrawerContainer extends React.Component {
 
   constructor(props) {
     super(props)
+    this.props.isSideDrawerVisible = props.isSideDrawerVisible
     Navigation.events().bindComponent(this);
-    console.log("this.props.text,"+this.props.text);
-  }
+    this.onDrawerClick = this.onDrawerClick.bind(this);
 
- 
-  componentDidAppear() {
-    this.props.isSideDrawerVisible = false;
   }
-  componentDidDisappear() {
-    this.props.isSideDrawerVisible = true;
-  }
-  navigateToScreen = (routename,title) => () => {
-    (!this.props.isSideDrawerVisible) ? this.props.isSideDrawerVisible = true : this.props.isSideDrawerVisible = false
-
+  
+  componentDidAppear(){
     Navigation.mergeOptions(this.props.componentId, {
       sideMenu: {
         'left': {
-          //visible: this.props.isSideDrawerVisible
-        }
+          visible: true
+       }
       }
     });
-
-    Navigation.setStackRoot('navigation_stack', {
-      component: {
-        name: routename,
-        passProps: {
-          isSideDrawerVisible: this.props.isSideDrawerVisible
-        }
-      }
-    });
-  //  goToRootScreen(routename,title)
   }
 
+  componentDidMount() {
+    ToastAndroid.show("componentDidMount",ToastAndroid.SHORT)
+    this.props.isSideDrawerVisible = false
+  }
+    
+  async onDrawerClick(){
+    ToastAndroid.show("onDrawerClick",ToastAndroid.SHORT)
+  }
+  
 
+  onLogoutClick(){
+    AsyncStorage.clear(function(err,result){
+      goToLogin()
+    });
+  }
+  navigateToScreen = (routename, title) => () => {
+  
+    Navigation.mergeOptions(this.props.componentId, {
+      sideMenu: {
+        'left': {
+          visible: false,
+          
+       }
+      }
+    });
+      if(routename != this.previousroute){
+  
+       Navigation.push('navigation_stack', {
+         component: {
+         name: routename,
+         passProps: {
+           isSideDrawerVisible: this.props.isSideDrawerVisible
+         },
+         options: {
+           topBar: {
+             title: {
+               text: title
+             },
+           }
+         }
+       }
+     });
+   }
+    this.previousroute = routename
+  }
+
+  
   render() {
 
     return (
       <View style={styles.container}>
         <ScrollView>
           <View >
-            {/* <Image
-              style={CommonStyle.roundedImage}
-              source={require('../../assets/ic_salogo.png')}/> */}
-             <View style={styles.footerContainer}>
-                 <Text style={{ color: 'black',fontWeight:'bold',fontSize: 15, marginTop: 10 }}>
-                  John Doe
+          <ImageBackground style={styles.footerContainer} source={require('../../assets/ic_salogo.png')}>
+            <View style={padding=10} >
+              <Text style={{ color: 'black', fontWeight: 'bold', fontSize: 15, marginTop: 10 }}>
+                John Doe
                 </Text>
-                <Text style={{color: 'black',fontWeight:'bold' ,fontSize: 15 }}>
-                  johndoe@gmail.com
+              <Text style={{ color: 'black', fontWeight: 'bold', fontSize: 15 }}>
+                johndoe@gmail.com
                 </Text>
-
-              </View>
-                     
-            <View style={styles.navSectionStyle}>
-            <TouchableOpacity style={styles.drawerMenu} onPress={this.navigateToScreen(strings.screen_signup,"Register Employee")} >
-                {/* <Icon name='account' size={iconSize} style={styles.drawerIcon} /> */}
-                <TitleText style={styles.navItemStyle} >Register Employee</TitleText>
-              </TouchableOpacity>
-
-              <TouchableOpacity style={styles.drawerMenu} onPress={this.navigateToScreen(strings.screen_home,"Home")} >
-                {/* <Icon name='account' size={iconSize} style={styles.drawerIcon} /> */}
-                <TitleText style={styles.navItemStyle} >Home</TitleText>
-              </TouchableOpacity>
-
-              <TouchableOpacity style={styles.drawerMenu} onPress={this.navigateToScreen(strings.screen_profile,"Profile")}>
-                {/* <Icon name='clipboard-text' size={iconSize} style={styles.drawerIcon} /> */}
-                <TitleText style={styles.navItemStyle}>Profile</TitleText>
-              </TouchableOpacity>
-
-              <TouchableOpacity style={styles.drawerMenu} onPress={this.navigateToScreen("hrms_newleave","New Leave")} >
-                {/* <Icon name='animation' size={iconSize} style={styles.drawerIcon} /> */}
-                <Text style={styles.navItemStyle}>NewLeave</Text>
-              </TouchableOpacity>
-
             </View>
-
-
+            </ImageBackground>
             <View style={styles.navSectionStyle}>
+              {/* <TouchableOpacity style={styles.drawerMenu} onPress={this.navigateToScreen(strings.screen_signup, strings.title_register)} >
+                  <Icon name='md-person-add' size={iconSize} style={styles.drawerIcon} />
+                  <TitleText style={styles.navItemStyle} >{strings.title_register}</TitleText>
+              </TouchableOpacity> */}
 
-              <TouchableOpacity style={styles.drawerMenu} onPress={this.navigateToScreen("hrms_policy","Policy")} >
-                {/* <Icon name='rss' size={iconSize} style={styles.drawerIcon} /> */}
-                <TitleText style={styles.navItemStyle} >Policy</TitleText>
+              <TouchableOpacity style={styles.drawerMenu} onPress={this.navigateToScreen(strings.screen_home, strings.title_home)} >
+                  <Icon name='md-home' size={iconSize} style={styles.drawerIcon} />
+                  <TitleText style={styles.navItemStyle} >{strings.title_home}</TitleText>
               </TouchableOpacity>
 
-              <TouchableOpacity style={styles.drawerMenu} onPress={this.navigateToScreen("hrms_faq","Faq")} >
-                {/* <Icon name='application' size={iconSize} style={styles.drawerIcon} /> */}
-                <TitleText style={styles.navItemStyle} >Faq</TitleText>
+              <TouchableOpacity style={styles.drawerMenu} onPress={this.navigateToScreen(strings.screen_profile, strings.title_profile)}>
+                  <Icon name='md-person' size={iconSize} style={styles.drawerIcon} />
+                  <TitleText style={styles.navItemStyle}>{strings.title_profile}</TitleText>
               </TouchableOpacity>
-              <TouchableOpacity style={styles.drawerMenu} >
-            {/* <Icon name='logout' size={iconSize} style={styles.drawerIcon} /> */}
-            <TitleText style={styles.navItemStyle} >Logout</TitleText>
-          </TouchableOpacity>
+  
+              <TouchableOpacity style={styles.drawerMenu} onPress={this.navigateToScreen(strings.screen_newleave, strings.title_newleave)} >
+                  <Icon name='md-at' size={iconSize} style={styles.drawerIcon} />
+                  <TitleText style={styles.navItemStyle}>{strings.title_newleave}</TitleText>
+              </TouchableOpacity>
+
+              <TouchableOpacity style={styles.drawerMenu} onPress={this.navigateToScreen(strings.screen_holiday,strings.title_holiday)} >
+                <Icon name='md-train' size={iconSize} style={styles.drawerIcon} />
+                <TitleText style={styles.navItemStyle} >{strings.title_holiday}</TitleText>
+              </TouchableOpacity>
+
+              <TouchableOpacity style={styles.drawerMenu} onPress={this.navigateToScreen(strings.screen_policy, strings.title_policy)} >
+                <Icon name='md-settings' size={iconSize} style={styles.drawerIcon} />
+                <TitleText style={styles.navItemStyle} >{strings.title_policy}</TitleText>
+              </TouchableOpacity>
+
+              <TouchableOpacity style={styles.drawerMenu} onPress={this.navigateToScreen(strings.screen_faq, strings.title_faq)} >
+                <Icon name='md-help' size={iconSize} style={styles.drawerIcon} />
+                <TitleText style={styles.navItemStyle} >{strings.title_faq}</TitleText>
+              </TouchableOpacity>
+
+              <TouchableOpacity style={styles.drawerMenu} onPress={this.onLogoutClick} >
+                <Icon name='md-log-out' size={iconSize} style={styles.drawerIcon} />
+                <TitleText style={styles.navItemStyle} >{strings.title_logout}</TitleText>
+              </TouchableOpacity>
+              
             </View>
           </View>
+
         </ScrollView>
 
-        <View >
-        <ImageBackground style={styles.footerContainer}
-              source={require('../../assets/ic_salogo.png')}/>
-        </View>
+        {/* <View >
+          <ImageBackground style={styles.footerContainer}
+            source={require('../../assets/ic_salogo.png')} />
+        </View> */}
       </View>
     )
   }
 }
 
-
+Navigation.events().registerNavigationButtonPressedListener(({ buttonId }) => {
+  
+  Navigation.mergeOptions(strings.screen_drawer_container, {
+    sideMenu: {
+      left: {
+        visible: true
+      }
+    }
+  });
+  });
+   
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -126,21 +166,24 @@ const styles = StyleSheet.create({
   },
 
   navItemStyle: {
-    padding: 15,
-    marginLeft: 20,
-
+    flex:1,
+    marginLeft: 15,
   },
   navSectionStyle: {
     marginLeft: 20,
   },
 
   drawerIcon: {
-    color: "grey"
+    color: "#000000",
+    marginRight:5
   },
 
   drawerMenu: {
+    flex:1,
     flexDirection: 'row',
     alignItems: 'center',
+    padding:15,
+    justifyContent:'flex-start',
     backgroundColor: 'transparent',
   },
   sectionHeadingStyle: {

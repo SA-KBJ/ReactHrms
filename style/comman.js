@@ -76,7 +76,28 @@ const baseStyles = StyleSheet.create({
     overflow: "hidden",
     borderWidth: 3,
     borderColor: "gray"
-  }
+  },
+  inputContainer: {
+    width: "62%",
+    margin: dimen.marginTiny,
+    alignItems: 'center',
+  },
+  buttonstyle: {
+    width:'100%',
+    alignItems: 'stretch',
+    marginTop:dimen.marginSmall,
+    marginBottom:dimen.marginSmall,
+    backgroundColor:colors.colorPrimary,
+  },
+   
+  commonInputStyle: {
+    alignSelf: 'center',
+    justifyContent: 'center',
+    color: 'black',
+    fontSize: dimen.fontNormal,
+    flex: 1,
+    minHeight: 40,
+  },
 })
 
 export default baseStyles;
