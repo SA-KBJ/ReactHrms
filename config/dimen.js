@@ -30,7 +30,10 @@ const dimen = {
   //font size
   fontNormal : 15,
   fontSmall : 12,
-  fontLarge:18
+  fontLarge:18,
+
+
+  imageSizeLarge:60
 };
 
 export default dimen;

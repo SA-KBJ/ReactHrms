@@ -8,20 +8,20 @@ let iconSize = 25;
 let menuIcon;
 
 export function populateIcons() {
-	let promise = new Promise((resolve, reject) => {
+  let promise = new Promise((resolve, reject) => {
     Promise.all(
-    [Icon.getImageSource('md-menu', iconSize, 'black')])
-			// other fetches
-			.then(values => {    
+      [Icon.getImageSource('md-menu', iconSize, 'black')])
+      // other fetches
+      .then(values => {
         menuIcon = values[0];
-				resolve(true);
-			})
-			.catch(error => {
-				console.log(error);
-				reject(error);
-			})
-			.done();
-	});
+        resolve(true);
+      })
+      .catch(error => {
+        console.log(error);
+        reject(error);
+      })
+      .done();
+  });
 }
 export const goToLogin = () => {
   Navigation.setRoot({
@@ -36,12 +36,12 @@ export const goToLogin = () => {
     }
   });
 }
-export const goToRootScreen = (screenname,screenTitle)=>{
- 
+export const goToRootScreen = (screenname, screenTitle) => {
+
   Navigation.setRoot({
     root: {
       sideMenu: {
-          left: {
+        left: {
           component: {
             id: strings.screen_drawer_container,
             name: strings.screen_drawer_container,
@@ -52,7 +52,7 @@ export const goToRootScreen = (screenname,screenTitle)=>{
         },
         center: {
           stack
-      
+
         },
       }
     }
@@ -61,29 +61,41 @@ export const goToRootScreen = (screenname,screenTitle)=>{
 export const goToHome = () => {
   Navigation.setRoot({
     root: {
-            component: {
-            id: strings.screen_home,
-            name: strings.screen_home,
-                }
-        },
-      })
+      component: {
+        id: strings.screen_home,
+        name: strings.screen_home,
+      }
+    },
+  })
 }
 
-export function startSplash(){
+export function startSplash() {
 
   Navigation.setRoot({
     root: {
       component: {
         id: strings.screen_splash,
         name: strings.screen_splash
-    }
+      }
 
     }
   });
 }
 
-const stack= {
-  id:"navigation_stack",
+export function startLeaveSchedule(){
+  Navigation.setRoot({
+    root: {
+      component: {
+        id: strings.action_leave_schedule,
+        name: strings.action_leave_schedule
+      }
+
+    }
+  });
+}
+
+const stack = {
+  id: "navigation_stack",
   options: {
     topBar: {
       title: {
@@ -91,10 +103,10 @@ const stack= {
       },
       leftButtons: [
         {
-         //icon: menuIcon
-         iconSize:30,
-         icon:  require("../assets/ic_drawer.png"),
-      
+          //icon: menuIcon
+          iconSize: 30,
+          icon: require("../assets/ic_drawer.png"),
+
         }
       ]
     }
