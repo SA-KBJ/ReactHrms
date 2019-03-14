@@ -17,8 +17,9 @@ export default class NewLeave extends React.Component {
             reason: "",
             Watchers: ['Add Watcher', 'a', 'b', 'c', 'd', 'e'],
             selectedWatcher: strings.promt_watcher_picker,
-            selectedStartDate: "",
-            selectedEndDate: "",
+            selectedStartDate: "22-3-2019",
+            selectedEndDate: "22-3-2019",
+            leaveDetails:[{"date":"22-3-2019","isHalf":false}],
             assignName: "Ankit Thakkar"
         };
     }

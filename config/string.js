@@ -14,6 +14,7 @@ export default appString = {
   screen_profile :"hrms_profile",
   screen_faq :"hrms_faq",
   screen_newleave :"hrms_newleave",
+  action_leave_schedule:"hrms_leave_schedule",
   screen_drawer_container :"hrms_drawercontainer",
 
   // Leave String
