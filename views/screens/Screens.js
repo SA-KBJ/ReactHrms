@@ -11,8 +11,7 @@ import Faq from '../faq/Faq'
 import DrawerContainer from '../drawer/DrawerContainer'
 import SignUp from '../signup/SignUp'
 import strings from '../../config/string'
-
-
+import Holidays from '../leave/UpcomingHoliday'
 import { Navigation } from 'react-native-navigation';
 
 function registerScreens(){
@@ -28,6 +27,7 @@ function registerScreens(){
     Navigation.registerComponent(strings.screen_faq,()=>Faq)
     Navigation.registerComponent(strings.screen_drawer_container,()=>DrawerContainer)
     Navigation.registerComponent(strings.screen_signup,()=>SignUp)
+    Navigation.registerComponent(strings.screen_holiday,()=>Holidays)
 
 
 }

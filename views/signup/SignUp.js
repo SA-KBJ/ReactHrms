@@ -1,6 +1,6 @@
 import React from 'react'
 import {
-  View,
+View,
   Button,
   TextInput,
   StyleSheet
@@ -8,13 +8,87 @@ import {
 
 export default class SignUp extends React.Component {
   state = {
-    username: '', password: '', email: '', phone_number: ''
+    isProgress: false ,
+
+    controls:{
+      firstname:{
+        value: "",
+        valid: false,
+        touched: false
+      },
+      middlename:{
+        value: "",
+        valid: false,
+        touched: false
+      },
+      lastname:{
+        value: "",
+        valid: false,
+        touched: false
+      },
+      birthdate:{
+        value: "",
+        valid: false,
+        touched: false
+      },
+      gender:{
+        value: "",
+        valid: false,
+        touched: false
+      },
+      address:{
+        value: "",
+        valid: false,
+        touched: false
+      },
+      mobilenumber:{
+        value: "",
+        valid: false,
+        touched: false
+      }, 
+      permanentaddress:{
+        value: "",
+        valid: false,
+        touched: false
+      },    
+      pannumber:{
+        value: "",
+        valid: false,
+        touched: false
+      },
+      adhaarnumber:{
+        value: "",
+        valid: false,
+        touched: false
+      },
+      passportnumber:{
+        value: "",
+        valid: false,
+        touched: false
+      },
+      password:{
+        value: "",
+        valid: false,
+        validationRules: {
+          minLength: 6
+        },
+        touched: false
+      },
+      email:{ 
+        value: "",
+        valid: false,
+        validationRules: {
+          isEmail:true
+        },
+        touched: false
+      }
+    }
+    
   }
   onChangeText = (key, val) => {
     this.setState({ [key]: val })
   }
   signUp = async () => {
-    const { username, password, email, phone_number } = this.state
     try {
       // here place your signup logic
       console.log('user successfully signed up!: ', success)

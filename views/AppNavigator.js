@@ -5,21 +5,23 @@ import strings from "../config/string"
 let iconSize = 25;
 let menuIcon;
 
-export function populateIcons() {
-	let promise = new Promise((resolve, reject) => {
-    Promise.all(
-    [Icon.getImageSource('md-menu', iconSize, 'black')])
-			// other fetches
-			.then(values => {    
-        menuIcon = values[0];
-				resolve(true);
-			})
-			.catch(error => {
-				console.log(error);
-				reject(error);
-			})
-			.done();
-	});
+export const goToForgotPasssword =()=>{
+  Navigation.mergeOptions('loginstack', {
+    topBar: {
+    title: {
+      text: "Forgot Password"
+    },
+   
+}
+});
+  Navigation.push('loginstack', {
+    component: {
+      id: strings.screen_forgotpassword,
+      name: strings.screen_forgotpassword
+   }
+  
+   
+  });
 }
 export const goToLogin = () => {
 
@@ -31,12 +33,27 @@ export const goToLogin = () => {
         menuIcon = values[0];
         Navigation.setRoot({
           root: {
-            component: {
-              id: strings.screen_login,
-        name: strings.screen_login,
-        passProps: {
-          text: 'This is tab 1'
-        }
+            stack: {
+              id:"loginstack",
+              children: [{
+                component: {
+                  id: strings.screen_login,
+                  name: strings.screen_login,
+                  passProps: {
+                   text: 'This is tab 1'
+                 }
+                }
+              }],
+              options: {
+                topBar: {
+                  title: {
+                    text: "Login"
+                  },
+                  backButton: {visible: false},
+
+                 }
+
+              }
             }
           }
         });
@@ -59,9 +76,6 @@ export const goToRootScreen = (screenname,screenTitle)=>{
           component: {
             id: strings.screen_drawer_container,
             name: strings.screen_drawer_container,
-            passProps: {
-              isSideDrawerVisible: false
-            },
           }
         },
         center: {
@@ -73,27 +87,25 @@ export const goToRootScreen = (screenname,screenTitle)=>{
               title:{
                 text:"Home"
               },
-              leftButtons: [
-                {
+              leftButtons: [{
                  id:"menuIcon",
-                 icon: menuIcon,
-                 
-                }
-               
-              ]
+                 icon: menuIcon,    
+                }]
             }},
           children: [{
             component: {
               id: strings.screen_home,
               name: strings.screen_home,
             }
-         }]
-        }
+          }]
+         }
         },
        }
      }
   });
 }
+
+
 export const goToHome = () => {
   Navigation.setRoot({
     root: {

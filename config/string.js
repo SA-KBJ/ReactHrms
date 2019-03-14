@@ -15,6 +15,7 @@ export default appString = {
   screen_faq :"hrms_faq",
   screen_newleave :"hrms_newleave",
   screen_drawer_container :"hrms_drawercontainer",
+  screen_holiday :"hrms_holiday",
 
   // Leave String
   lable_Multiple_leave: "Want to apply for Multiple Days Leaves?",
@@ -65,7 +66,25 @@ export default appString = {
   placeholder_email: "Email",
   placeholder_password: "Password",
   action_login: "LOGIN",
+  action_submit: "Submit",
+
   str_forgotpassword: "Forgot password?",
   company_name: "Solution Anlalysts",
-  company_qoute: "Analysing needs,delivering solutions"
+  company_qoute: "Analysing needs,delivering solutions",
+  title_faq:"FAQ",
+  faq_question1:"How to apply for Floating Leave?",
+  faq_answer1:"Floating Leave is not a part of HRMS system. If one wish to take Floating Leave, one need to apply for Leave same as normal leave application; it will have same approval flow. After leave consumption, one need to contact HR for settlement of Floating Leave. Once the settlement is done, one will get 1 leave credited in his/her leave balance.",
+  faq_question2:"How to apply for Compensatory Leave?",
+  faq_answer2:"Compensatory Off is not part of HRMS system. The Compensatory leave requested needs to be updated in HR section of Redmine & assign to HR Admins along with mention of date & reporting authority.. HR Admins will assign the ticket to reporting authority seeking for approval. The leave will be added only after approval received from reporting authority.",
+
+  title_home:"Home",
+  title_register:"Register Employee",
+  title_profile:"Profile",
+  title_newleave:"New leave",
+  title_holiday:"Holiday",
+  title_logout:"Logout",
+  title_policy:"Policy",
+
+  title_myleave:"My Leave"
+
 };

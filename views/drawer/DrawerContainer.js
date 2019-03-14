@@ -1,13 +1,13 @@
 import React from 'react';
-import { StyleSheet, Text,ToastAndroid, View, Image, ScrollView, TouchableOpacity,alert, ImageBackground } from 'react-native';
+import { StyleSheet, Text,ToastAndroid, View, AsyncStorage, ScrollView, TouchableOpacity,alert, ImageBackground } from 'react-native';
 import TitleText from '../../customComponent/TitleText'
 import { Navigation } from 'react-native-navigation'
 import strings from "../../config/string"
 import Icon from "react-native-vector-icons/Ionicons";
 import {goToLogin} from "../AppNavigator"
+import CommonStyle from "../../style/comman";
 
 let iconSize = 25;
-var previousroute =""
 
 export default class DrawerContainer extends React.Component {
 
@@ -18,6 +18,7 @@ export default class DrawerContainer extends React.Component {
     this.onDrawerClick = this.onDrawerClick.bind(this);
 
   }
+  
   componentDidAppear(){
     Navigation.mergeOptions(this.props.componentId, {
       sideMenu: {
@@ -36,7 +37,13 @@ export default class DrawerContainer extends React.Component {
   async onDrawerClick(){
     ToastAndroid.show("onDrawerClick",ToastAndroid.SHORT)
   }
+  
 
+  onLogoutClick(){
+    AsyncStorage.clear(function(err,result){
+      goToLogin()
+    });
+  }
   navigateToScreen = (routename, title) => () => {
   
     Navigation.mergeOptions(this.props.componentId, {
@@ -67,17 +74,8 @@ export default class DrawerContainer extends React.Component {
    }
     this.previousroute = routename
   }
- 
- 
-  navigationButtonPressed({ buttonId }) {
-    alert('menuIcon');
 
-    if (buttonId === 'cancelBtn') {
-      Navigation.dismissModal(this.props.componentId);
-    } else if (buttonId === 'menu') {
-      alert('menuIcon');
-    }
-  }
+  
   render() {
 
     return (
@@ -95,39 +93,46 @@ export default class DrawerContainer extends React.Component {
             </View>
             </ImageBackground>
             <View style={styles.navSectionStyle}>
-              <TouchableOpacity style={styles.drawerMenu} onPress={this.navigateToScreen(strings.screen_signup, "Register Employee")} >
+              {/* <TouchableOpacity style={styles.drawerMenu} onPress={this.navigateToScreen(strings.screen_signup, strings.title_register)} >
                   <Icon name='md-person-add' size={iconSize} style={styles.drawerIcon} />
-                  <TitleText style={styles.navItemStyle} >Register Employee</TitleText>
-              </TouchableOpacity>
+                  <TitleText style={styles.navItemStyle} >{strings.title_register}</TitleText>
+              </TouchableOpacity> */}
 
-              <TouchableOpacity style={styles.drawerMenu} onPress={this.navigateToScreen(strings.screen_home, "Home")} >
+              <TouchableOpacity style={styles.drawerMenu} onPress={this.navigateToScreen(strings.screen_home, strings.title_home)} >
                   <Icon name='md-home' size={iconSize} style={styles.drawerIcon} />
-                  <TitleText style={styles.navItemStyle} >Home</TitleText>
+                  <TitleText style={styles.navItemStyle} >{strings.title_home}</TitleText>
               </TouchableOpacity>
 
-              <TouchableOpacity style={styles.drawerMenu} onPress={this.navigateToScreen(strings.screen_profile, "Profile")}>
+              <TouchableOpacity style={styles.drawerMenu} onPress={this.navigateToScreen(strings.screen_profile, strings.title_profile)}>
                   <Icon name='md-person' size={iconSize} style={styles.drawerIcon} />
-                  <TitleText style={styles.navItemStyle}>Profile</TitleText>
+                  <TitleText style={styles.navItemStyle}>{strings.title_profile}</TitleText>
               </TouchableOpacity>
-
-              <TouchableOpacity style={styles.drawerMenu} onPress={this.navigateToScreen("hrms_newleave", "New Leave")} >
+  
+              <TouchableOpacity style={styles.drawerMenu} onPress={this.navigateToScreen(strings.screen_newleave, strings.title_newleave)} >
                   <Icon name='md-at' size={iconSize} style={styles.drawerIcon} />
-                  <Text style={styles.navItemStyle}>NewLeave</Text>
+                  <TitleText style={styles.navItemStyle}>{strings.title_newleave}</TitleText>
               </TouchableOpacity>
 
-              <TouchableOpacity style={styles.drawerMenu} onPress={this.navigateToScreen("hrms_policy", "Policy")} >
+              <TouchableOpacity style={styles.drawerMenu} onPress={this.navigateToScreen(strings.screen_holiday,strings.title_holiday)} >
+                <Icon name='md-train' size={iconSize} style={styles.drawerIcon} />
+                <TitleText style={styles.navItemStyle} >{strings.title_holiday}</TitleText>
+              </TouchableOpacity>
+
+              <TouchableOpacity style={styles.drawerMenu} onPress={this.navigateToScreen(strings.screen_policy, strings.title_policy)} >
                 <Icon name='md-settings' size={iconSize} style={styles.drawerIcon} />
-                <TitleText style={styles.navItemStyle} >Policy</TitleText>
+                <TitleText style={styles.navItemStyle} >{strings.title_policy}</TitleText>
               </TouchableOpacity>
 
-              <TouchableOpacity style={styles.drawerMenu} onPress={this.navigateToScreen("hrms_faq", "Faq")} >
+              <TouchableOpacity style={styles.drawerMenu} onPress={this.navigateToScreen(strings.screen_faq, strings.title_faq)} >
                 <Icon name='md-help' size={iconSize} style={styles.drawerIcon} />
-                <TitleText style={styles.navItemStyle} >Faq</TitleText>
+                <TitleText style={styles.navItemStyle} >{strings.title_faq}</TitleText>
               </TouchableOpacity>
-              <TouchableOpacity style={styles.drawerMenu} onPress={goToLogin} >
+
+              <TouchableOpacity style={styles.drawerMenu} onPress={this.onLogoutClick} >
                 <Icon name='md-log-out' size={iconSize} style={styles.drawerIcon} />
-                <TitleText style={styles.navItemStyle} >Logout</TitleText>
+                <TitleText style={styles.navItemStyle} >{strings.title_logout}</TitleText>
               </TouchableOpacity>
+              
             </View>
           </View>
 
@@ -142,7 +147,17 @@ export default class DrawerContainer extends React.Component {
   }
 }
 
-
+Navigation.events().registerNavigationButtonPressedListener(({ buttonId }) => {
+  
+  Navigation.mergeOptions(strings.screen_drawer_container, {
+    sideMenu: {
+      left: {
+        visible: true
+      }
+    }
+  });
+  });
+   
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -151,21 +166,27 @@ const styles = StyleSheet.create({
   },
 
   navItemStyle: {
-    padding: 15,
-    marginLeft: 20,
-
+    flex:1,
+    alignItems:'center',
+    justifyContent:'center',
+    marginLeft: 15,
   },
   navSectionStyle: {
     marginLeft: 20,
   },
 
   drawerIcon: {
-    color: "#000000"
+
+    color: "#000000",
+    marginRight:5
   },
 
   drawerMenu: {
+    flex:1,
     flexDirection: 'row',
     alignItems: 'center',
+    padding:15,
+    justifyContent:'flex-start',
     backgroundColor: 'transparent',
   },
   sectionHeadingStyle: {

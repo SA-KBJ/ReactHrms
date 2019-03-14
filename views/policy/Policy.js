@@ -10,7 +10,6 @@ export default class Policy extends Component {
   constructor(props) {
     super(props)}
 
-
 render(){
     return(
         <WebView
