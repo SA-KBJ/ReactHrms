@@ -173,11 +173,17 @@ const styles = StyleSheet.create({
 
     },
     halfLeaveImage: {
-        ...peopleImage,
+        width: dimen.imageSizeLarge,
+        height: dimen.imageSizeLarge,
+        borderRadius: 100,
+        borderWidth: 2,
         borderColor: colors.reason_icon
     },
     approvePendingLeave: {
-        ...peopleImage,
+        width: dimen.imageSizeLarge,
+        height: dimen.imageSizeLarge,
+        borderRadius: 100,
+        borderWidth: 2,
         borderColor: colors.approved_icon
     },
 

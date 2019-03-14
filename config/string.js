@@ -72,8 +72,6 @@ export default appString = {
   str_forgotpassword: "Forgot password?",
   company_name: "Solution Anlalysts",
   company_qoute: "Analysing needs,delivering solutions",
-<<<<<<< HEAD
-
 
 
   //profile
@@ -81,8 +79,7 @@ export default appString = {
   label_company:"COMPANY",
   label_exprience:"EXPERIENCES",
   label_other:"OTHER",
-  label_family:"FAMILY"
-=======
+  label_family:"FAMILY",
   title_faq:"FAQ",
   faq_question1:"How to apply for Floating Leave?",
   faq_answer1:"Floating Leave is not a part of HRMS system. If one wish to take Floating Leave, one need to apply for Leave same as normal leave application; it will have same approval flow. After leave consumption, one need to contact HR for settlement of Floating Leave. Once the settlement is done, one will get 1 leave credited in his/her leave balance.",
@@ -99,5 +96,4 @@ export default appString = {
 
   title_myleave:"My Leave"
 
->>>>>>> hrms_auth
 };

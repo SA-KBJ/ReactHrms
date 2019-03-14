@@ -31,7 +31,7 @@ export default class Splash extends Component {
     }
 
    load = () => {
-    if(Constants.isLoggeIn){
+    if(Constants.isLoggedIn){
       goToRootScren("hrms_home","Home")
     }else{
       goToLogin()
@@ -72,26 +72,4 @@ const Style = StyleSheet.create({
   },
 })
 
- function navigateToHome(){
-  Navigation.setRoot({
-    root: {
-      sideMenu: {
-        left: {
-          component: {
-            name: 'hrms_drawercontainer',
-            passProps: {
-              text: 'This is a left side menu screen'
-            }
-          }
-        },
-        center: {
-          component: {
-            name: 'hrms_home'
-          },
-        },
-       
-      }
-    }
-  });
-}
 

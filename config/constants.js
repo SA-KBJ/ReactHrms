@@ -1,7 +1,7 @@
 
 const constants = {
    name: "HRMS",
-   isLoggeIn: false,
+   isLoggedIn: false,
    startDate: "Start",
    endDate: "End",
 
