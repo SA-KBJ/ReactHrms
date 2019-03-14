@@ -105,6 +105,23 @@ const stack= {
       name: strings.screen_home,
     }
   }]
+  }
+
+export const goToPersonal = () => {
+  Navigation.mergeOptions('profilestack', {
+    topBar: {
+      title: {
+        text: "Personal"
+      }
+
+    }
+  });
+  Navigation.push('profilestack', {
+    component: {
+      name: "Personal"
+    }
+
+  });
 }
 
 

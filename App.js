@@ -9,8 +9,9 @@ function start(){
   Navigation.events().registerAppLaunchedListener(() => {
     startSplash();
 })
-
 }
+
+
 module.exports={
     start
 }

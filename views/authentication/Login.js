@@ -7,6 +7,7 @@ import dimen from '../../config/dimen'
 import colors from "../../config/colors";
 import {goToHome,goToRootScreen} from "../AppNavigator"
 
+
 export default class Login extends Component {
   static navigationOptions = {
     title: 'Login',
@@ -53,7 +54,7 @@ export default class Login extends Component {
     //   this.callAlert(Constants.alert_title, Constants.error_password)
     // } else {
       goToRootScreen("hrms_home","Home")
-   // }
+
   }
 
   callAlert(title, message, func) {
