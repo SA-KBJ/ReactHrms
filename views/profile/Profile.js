@@ -131,7 +131,12 @@ class Profile extends React.Component {
 
                                 case string.label_personal:
                                     this.refs.toast.show(name);
-                                    <goToPersonal />
+                                    goToPersonal();
+                                    break;
+
+                                default:
+                                    this.refs.toast.show(name);
+                                    goToPersonal();
                                     break;
                             }
                         }

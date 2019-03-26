@@ -80,8 +80,8 @@ export const goToRootScreen = (screenname,screenTitle)=>{
             }},
           children: [{
             component: {
-              id: strings.screen_home,
-              name: strings.screen_home,
+              id: strings.screen_profile,
+              name: strings.screen_profile,
             }
           }]
          }
@@ -141,7 +141,8 @@ export const goToPersonal = () => {
   });
   Navigation.push('profilestack', {
     component: {
-      name: "Personal"
+      id:strings.screen_personal,
+      name: strings.screen_personal
     }
 
   });

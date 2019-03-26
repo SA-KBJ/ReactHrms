@@ -17,6 +17,7 @@ export default appString = {
   action_leave_schedule:"hrms_leave_schedule",
   screen_drawer_container :"hrms_drawercontainer",
   screen_holiday :"hrms_holiday",
+  screen_personal:"profile_personal",
 
   // Leave String
   lable_Multiple_leave: "Want to apply for Multiple Days Leaves?",
