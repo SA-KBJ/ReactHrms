@@ -1,3 +1,4 @@
+
 package com.reacthrms;
 
 import android.app.Application;
@@ -16,7 +17,7 @@ import com.reactnativenavigation.NavigationApplication;
 import com.reactnativenavigation.react.NavigationReactNativeHost;
 import com.reactnativenavigation.react.ReactGateway;
 public class MainApplication extends NavigationApplication {
-  
+
     @Override
     protected ReactGateway createReactGateway() {
         ReactNativeHost host = new NavigationReactNativeHost(this, isDebug(), createAdditionalReactPackages()) {
@@ -37,11 +38,11 @@ public class MainApplication extends NavigationApplication {
         // Add additional packages you require here
         // No need to add RnnPackage and MainReactPackage
         return Arrays.<ReactPackage>asList(
-          new VectorIconsPackage(),
-          new RNCWebViewPackage()
+                new VectorIconsPackage(),
+                new RNCWebViewPackage()
         );
     }
-  
+
     @Override
     public List<ReactPackage> createAdditionalReactPackages() {
         return getPackages();
@@ -50,35 +51,34 @@ public class MainApplication extends NavigationApplication {
 
 
 
-  // private final ReactNativeHost mReactNativeHost = new ReactNativeHost(this) {
-  //   @Override
-  //   public boolean getUseDeveloperSupport() {
-  //     return BuildConfig.DEBUG;
-  //   }
+// private final ReactNativeHost mReactNativeHost = new ReactNativeHost(this) {
+//   @Override
+//   public boolean getUseDeveloperSupport() {
+//     return BuildConfig.DEBUG;
+//   }
 
-  //   @Override
-  //   protected List<ReactPackage> getPackages() {
-  //     return Arrays.<ReactPackage>asList(
-  //         new MainReactPackage(),
+//   @Override
+//   protected List<ReactPackage> getPackages() {
+//     return Arrays.<ReactPackage>asList(
+//         new MainReactPackage(),
 //            new RNCWebViewPackage(),
-  //           new VectorIconsPackage()
-  //     );
-  //   }
+//           new VectorIconsPackage()
+//     );
+//   }
 
-  //   @Override
-  //   protected String getJSMainModuleName() {
-  //     return "index";
-  //   }
-  // };
+//   @Override
+//   protected String getJSMainModuleName() {
+//     return "index";
+//   }
+// };
 
-  // @Override
-  // public ReactNativeHost getReactNativeHost() {
-  //   return mReactNativeHost;
-  // }
+// @Override
+// public ReactNativeHost getReactNativeHost() {
+//   return mReactNativeHost;
+// }
 
-  // @Override
-  // public void onCreate() {
-  //   super.onCreate();
-  //   SoLoader.init(this, /* native exopackage */ false);
-  // }
-
+// @Override
+// public void onCreate() {
+//   super.onCreate();
+//   SoLoader.init(this, /* native exopackage */ false);
+// }

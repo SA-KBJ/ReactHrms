@@ -68,6 +68,7 @@ export const goToRootScreen = (screenname,screenTitle)=>{
           :{
           id:"navigation_stack",
           options: {
+          
             topBar: {
               title:{
                 text:"Home"

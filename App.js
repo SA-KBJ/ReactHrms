@@ -7,9 +7,8 @@ function start(){
   registerScreens()
   Navigation.events().registerAppLaunchedListener(() => {
      startSplash();
-})
+  })
 }
-
 
 module.exports={
     start

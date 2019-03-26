@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, ActivityIndicator,Text, View, FlatList } from 'react-native';
+import { StyleSheet, ActivityIndicator,Text, View, FlatList,AsyncStorage } from 'react-native';
 import colors from '../../config/colors'
 import strings from '../../config/string'
 import dimen from '../../config/dimen'
@@ -17,14 +17,16 @@ export default class UpComingHoliday extends React.Component {
   }
 
   async componentDidMount(){
-    await apiManager.getHolidayList().then((res)=>{
+    await AsyncStorage.getItem('accesstoken').then((token)=>{
+     apiManager.getHolidayList(token).then((res)=>{
       if (res.status.toString() === "200") {
         this.setState({holidayList:res.holidays,loading : false})
         alert(JSON.stringify(res.holidays))
       }else{
-        alert("error:  " + res.message);
+        alert("error:  " + res.error);
       }
     })
+  })
   }
   
   rowItem = (item) => {
