@@ -1,14 +1,25 @@
 import React, { Component } from "react";
-import { View,WebView } from "react-native";
+import {Platform} from 'react-native'
+import {WebView} from 'react-native-webview'
+import { Navigation } from 'react-native-navigation'
+
+const isAndroid=  Platform.OS==='android'
 
 export default class Policy extends Component {
+
+  constructor(props) {
+    super(props)}
+
 render(){
     return(
-
-        <WebView ref={'webview'} automaticallyAdjustContentInsets={false} source={require("../../assets/policy.html")} />
-
+        <WebView
+        originWhitelist={['*']}
+        source= {{ uri: isAndroid ? 'file:///android_asset/policy.html'
+        :require("../../assets/policy.html")}}
+        startInLoadingState={true} 
+        style={{ marginTop:5 }}
+      />
    );
-   
+ }
 }
-
-}
+ 

@@ -1,59 +1,48 @@
 import React, { Component } from "react";
-import { View, Alert, Text, Image, StyleSheet,KeyboardAvoidingView } from "react-native";
+import { View, Alert, Text, Image, StyleSheet, KeyboardAvoidingView, AsyncStorage } from "react-native";
 import CommonStyle from "../../style/comman";
 import CommonStrings from "../../config/string";
 import { Input, Button } from 'react-native-elements'
 import dimen from '../../config/dimen'
 import colors from "../../config/colors";
-import {goToProfile} from "../AppNavigator"
+import ProgressDialog from '../../utility/progressdialog';
+import ApiManager from "../../services/apimanager"
+import { goToRootScreen, goToForgotPasssword } from "../AppNavigator"
+import validateInput from "../../utility/validation";
+
 
 export default class Login extends Component {
-  static navigationOptions = {
-    title: 'Login',
-   
-    headerStyle: {
-      backgroundColor: '#ffffff',
-    },
-  
-    headerTintColor: colors.colorPrimary,
-    headerTitleStyle: {
-    width:'90%',
-      fontWeight: 'bold',
-      alignSelf:'center'
 
-    },
-  };
   constructor(props) {
     super(props)
     this.state = {
-      email: '',
-      password: '',
-      welcomeText: CommonStrings.str_welcome,
-      pmsCredentials: CommonStrings.str_credentials,
-      forgotPw: CommonStrings.str_forgotpassword
+      profile: "",
+      isProgress: false,
+      controls: {
+        email: {
+          value: "",
+          valid: false,
+          validationRules: {
+            isEmail: true
+          },
+          touched: false
+        },
+        password: {
+          value: "",
+          valid: false,
+          validationRules: {
+            minLength: 6
+          },
+          touched: false
+        },
+      },
     }
   }
-
-  componentDidMount() {
-    //this method call when page visible to user
-    // this.callAlert(Constants.alert_title, "Email: johndoe@gmail.com | Password: 123456", null)
+  openProgressbar = (val) => {
+    this.setState({ isProgress: val })
   }
-
-  setEmail(email) {
-    this.setState({ email })
-  }
-
-  setPassword(password) {
-    this.setState({ password })
-  }
-  validateData = () => {
-    // if (this.state.email == '') {
-    //   this.callAlert(Constants.alert_title, Constants.error_email)
-    // } else if (this.state.password == '') {
-    //   this.callAlert(Constants.alert_title, Constants.error_password)
-    // } else {
-      goToProfile()
-   // }
+  startDrawerScreen = () => {
+    goToRootScreen(CommonStrings.screen_home, "Home")
   }
 
   callAlert(title, message, func) {
@@ -65,28 +54,140 @@ export default class Login extends Component {
       { cancelable: false }
     )
   }
-   render() {
-    return (
-      <KeyboardAvoidingView style={CommonStyle.container}  behavior="padding" enabled>
-      <View style={CommonStyle.container}>
 
-        <Image source={require('../../assets/ic_salogo.png')} style={CommonStyle.image} />
-        <View style={CommonStyle.verticalView}>
-          <Text style={styles.titleText}>{this.state.welcomeText}</Text>
-          <Text style={styles.smallText}>{this.state.pmsCredentials}</Text>
-          <Input containerStyle={styles.inputContainer} inputStyle={styles.input} placeholder="Email" onChangeText={(text) => this.setEmail(text)} />
-          <Input containerStyle={styles.inputContainer} inputStyle={styles.input} placeholder="Password" onChangeText={(text) => this.setPassword(text)} />
-         <View style = {CommonStyle.horizontalView}>
-         
-         <Button buttonStyle={styles.buttonStyle} title={CommonStrings.action_login} onPress={this.validateData} />
-         </View>
-       
-          <Text style={styles.forgotStyle} onPress ={this.navigateToForgotPasswordPage}>{this.state.forgotPw}</Text>
-        </View>
-      </View>
-      </KeyboardAvoidingView>
+
+  render() {
+    return (
+      this.state.isProgress ?
+        <ProgressDialog visible={true} />
+        :
+        <KeyboardAvoidingView style={CommonStyle.container} behavior="padding">
+          <ProgressDialog visible={false} />
+
+          <View style={CommonStyle.container}>
+
+            <Image source={require('../../assets/ic_salogo.png')} style={CommonStyle.image} />
+            <View style={CommonStyle.verticalView}>
+              <Text style={styles.titleText}>{CommonStrings.str_welcome}</Text>
+              <Text style={styles.smallText}>{CommonStrings.str_credentials}</Text>
+              <Input containerStyle={CommonStyle.inputContainer} autoCapitalize="none"
+                autoCorrect={false} keyboardType="email-address" touched={this.state.controls.email.touched} inputStyle={CommonStyle.commonInputStyle} placeholder="Email" value={this.state.controls.email.value} onChangeText={val => this.validateUserInput("email", val)} />
+              <Input containerStyle={CommonStyle.inputContainer} touched={this.state.controls.password.touched}
+                inputStyle={CommonStyle.commonInputStyle} placeholder="Password" value={this.state.controls.password.value} secureTextEntry={true} onChangeText={val => this.validateUserInput("password", val)} />
+              <View style={CommonStyle.horizontalView}>
+                <Button buttonStyle={CommonStyle.buttonstyle}
+                   disabled={
+                      !this.state.controls.email.valid ||
+                      !this.state.controls.password.valid
+                    }
+                  title={CommonStrings.action_login} onPress={this.onLoginPress} />
+              </View>
+              <Text style={styles.forgotStyle} onPress={goToForgotPasssword}>{CommonStrings.str_forgotpassword}</Text>
+            </View>
+          </View>
+        </KeyboardAvoidingView>
     );
   }
+
+
+  validateUserInput = (key, val) => {
+    let connectedValue = {};
+    if (this.state.controls[key].validationRules.equalTo) {
+      const equalControl = this.state.controls[key].validationRules.equalTo;
+      const equalValue = this.state.controls[equalControl].value;
+      connectedValue = {
+        ...connectedValue,
+        equalTo: equalValue
+      };
+    }
+    this.setState(prevState => {
+
+      return {
+        controls: {
+          ...prevState.controls,
+          [key]: {
+            ...prevState.controls[key],
+            value: val,
+            valid: validateInput(
+              val,
+              prevState.controls[key].validationRules,
+              connectedValue
+            ),
+            touched: true
+          }
+        }
+      };
+    });
+  }
+
+  onLoginPress = async () => {
+
+    this.openProgressbar(true);
+    await ApiManager.login(this.state.controls.email.value.trim(), this.state.controls.password.value.trim()).then((response) => {
+      status = response.status.toString();
+      this.openProgressbar(false);
+      if (status === "200") {
+        this.setState(
+          {
+            profile: response.user
+          },
+          // In this block you can do something with new state.
+          function () {
+            this.saveAccessToken(response.access_token)
+            this.startDrawerScreen();
+          })
+      } else {
+        alert("error:  " + response.error);
+      }
+
+    })
+    //  await fetch(apiconfig.Base_url+ apiconfig.LoginApi, {
+    //       method: 'POST',
+    //       headers: {
+    //         'Content-Type': 'application/json',
+    //       }, 
+    //       body: JSON.stringify({
+    //           "email":this.state.controls.email.value.trim(),
+    //           "password":this.state.controls.password.value.trim()
+    //         })
+    //     })
+    //     .then((response) => { 
+    //       status = response.status.toString();
+    //       return response.json()}
+    //       )
+    //     .then((responseJson) => {
+    //       this.openProgressbar(false);
+    //       this.setState(
+    //         {
+    //           isLoading: false,
+    //           profile: responseJson.user
+    //         },
+    //    // In this block you can do something with new state.
+    //      function() {
+    //        const json= responseJson
+    //       if (status === "200") {
+    //         this.saveAccessToken(json.access_token)
+    //         this.startDrawerScreen();
+    //        }else{
+    //         alert("error:  " + json.message);
+    //       }
+    //       })
+    //     })
+    //     .catch((error) => {
+    //       console.error(error);
+    //       alert("error:  " + error);
+    //     });
+  }
+
+  saveAccessToken = async token => {
+    try {
+      await AsyncStorage.setItem('accesstoken', token);
+    } catch (error) {
+      // Error retrieving data
+      console.log(error.message);
+    }
+  };
+
 }
 
 const styles = StyleSheet.create({
@@ -102,26 +203,7 @@ const styles = StyleSheet.create({
     color: colors.night,
     marginBottom: dimen.marginTiny
   },
-  inputContainer: {
-    width: "62%",
-    margin: dimen.marginTiny,
-    alignItems: 'center',
-  },
-  buttonStyle: {
-    width:'100%',
-    alignItems: 'stretch',
-    marginTop:dimen.marginSmall,
-    marginBottom:dimen.marginSmall,
-    backgroundColor:colors.colorPrimary,
-  },
-  input: {
-    alignSelf: 'center',
-    justifyContent: 'center',
-    color: 'black',
-    fontSize: dimen.fontNormal,
-    flex: 1,
-    minHeight: 40,
-  },
+
   forgotStyle: {
     width: '100%',
     fontSize: dimen.fontSmall,

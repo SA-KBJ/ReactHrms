@@ -19,18 +19,21 @@ const dimen = {
 
   // Text size
   textTiny: 5,
-  textSmall: 12,
-  textNormal: 15,
-  textMedium: 18,
-  textLarge: 20,
-  textXlarge: 25,
-  textBig: 30,
+  textSmall: 10,
+  textNormal: 13,
+  textMedium: 15,
+  textLarge: 18,
+  textXlarge: 21,
+  textBig: 25,
 
 
   //font size
   fontNormal : 15,
   fontSmall : 12,
-  fontLarge:18
+  fontLarge:18,
+
+
+  imageSizeLarge:60
 };
 
 export default dimen;

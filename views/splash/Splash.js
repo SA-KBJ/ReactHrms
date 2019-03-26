@@ -3,7 +3,7 @@ import { Image,Text,View,StyleSheet } from "react-native";
 import CommonStyle from "../../style/comman";
 import CommonStrings from "../../config/string";
 import Constants from "../../config/constants";
-import { goToLogin, goToHome } from "../AppNavigator"
+import { goToLogin, goToHome,goToNewLeave } from "../AppNavigator"
 import { Navigation } from 'react-native-navigation';
 
 export default class Splash extends Component {
@@ -31,8 +31,8 @@ export default class Splash extends Component {
     }
 
    load = () => {
-    if(Constants.isLoggeIn){
-      goToHome()
+    if(Constants.isLoggedIn){
+      goToRootScren("hrms_home","Home")
     }else{
       goToLogin()
     }
@@ -72,26 +72,4 @@ const Style = StyleSheet.create({
   },
 })
 
- function navigateToHome(){
-  Navigation.setRoot({
-    root: {
-      sideMenu: {
-        left: {
-          component: {
-            name: 'hrms_drawercontainer',
-            passProps: {
-              text: 'This is a left side menu screen'
-            }
-          }
-        },
-        center: {
-          component: {
-            name: 'hrms_home'
-          },
-        },
-       
-      }
-    }
-  });
-}
 

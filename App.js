@@ -1,25 +1,15 @@
 import React from 'react';
 import { Navigation } from "react-native-navigation";
 import {registerScreens} from './views/screens/Screens'
-
-
-// const App = createAppContainer(AppNavigator);
+import {startSplash} from './views/AppNavigator'
 
 function start(){
   registerScreens()
- Navigation.events().registerAppLaunchedListener(() => {
-  Navigation.setRoot({
-    root: {
-      component: {
-        name: "hrms_profile"
-      }
-      
-    }
-  });
-
- 
-});
+  Navigation.events().registerAppLaunchedListener(() => {
+     startSplash();
+  })
 }
+
 module.exports={
     start
 }

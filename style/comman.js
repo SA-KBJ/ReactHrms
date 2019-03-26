@@ -54,11 +54,20 @@ const baseStyles = StyleSheet.create({
   },
   modalContent: {
     backgroundColor: colors.white,
-    padding: 22,
-    justifyContent: "center",
-    alignItems: "center",
+    padding: dimen.paddingSmall,
+    // justifyContent: "center",
+    // alignItems: "center",
     borderRadius: 4,
     borderColor: "rgba(0, 0, 0, 0.1)"
+  },
+  rowMainContainer: {
+    padding: dimen.marginSmall,
+    marginBottom: dimen.marginSmall,
+    backgroundColor: colors.white,
+    borderWidth: 1,
+    borderColor: colors.textValueGray,
+    borderRadius: 4,
+    elevation: 3
   },
   roundedImage: {
     width: 50,
@@ -67,6 +76,28 @@ const baseStyles = StyleSheet.create({
     overflow: "hidden",
     borderWidth: 3,
     borderColor: "gray"
-  }})
+  },
+  inputContainer: {
+    width: "62%",
+    margin: dimen.marginTiny,
+    alignItems: 'center',
+  },
+  buttonstyle: {
+    width:'100%',
+    alignItems: 'stretch',
+    marginTop:dimen.marginSmall,
+    marginBottom:dimen.marginSmall,
+    backgroundColor:colors.colorPrimary,
+  },
+   
+  commonInputStyle: {
+    alignSelf: 'center',
+    justifyContent: 'center',
+    color: 'black',
+    fontSize: dimen.fontNormal,
+    flex: 1,
+    minHeight: 40,
+  },
+})
 
 export default baseStyles;

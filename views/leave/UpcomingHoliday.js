@@ -1,56 +1,62 @@
 import React from 'react';
-import { StyleSheet, Text, View, FlatList } from 'react-native';
+import { StyleSheet, ActivityIndicator,Text, View, FlatList,AsyncStorage } from 'react-native';
 import colors from '../../config/colors'
 import strings from '../../config/string'
 import dimen from '../../config/dimen'
-import { Image } from 'react-native-elements'
+import { Image, ListItem ,List} from 'react-native-elements'
+import apiManager from '../../services/apimanager'
 
 export default class UpComingHoliday extends React.Component {
 
   constructor(props) {
     super(props);
     this.state = {
-      holidayList: [
-        { "id": 1, "date": "Mar 21, 2019", "day": "Thursday", "name": "Dhuleti ", "image": "ic_salogo.png" },
-        { "id": 2, "date": "Mar 21, 2019", "day": "Thursday", "name": "Dhuleti", "image": "ic_salogo.png" },
-        { "id": 3, "date": "Mar 21, 2019", "day": "Thursday", "name": "Dhuleti", "image": "ic_salogo.png" },
-        { "id": 4, "date": "Mar 21, 2019", "day": "Thursday", "name": "Dhuleti", "image": "ic_salogo.png" },
-        { "id": 5, "date": "Mar 21, 2019", "day": "Thursday", "name": "Dhuleti", "image": "ic_salogo.png" },
-        { "id": 6, "date": "Mar 21, 2019", "day": "Thursday", "name": "Dhuleti", "image": "ic_salogo.png" },
-        { "id": 7, "date": "Mar 21, 2019", "day": "Thursday", "name": "Dhuleti", "image": "ic_salogo.png" },
-        { "id": 8, "date": "Mar 21, 2019", "day": "Thursday", "name": "Dhuleti", "image": "ic_salogo.png" },
-        { "id": 9, "date": "Mar 21, 2019", "day": "Thursday", "name": "Dhuleti", "image": "ic_salogo.png" },
-        { "id": 10, "date": "Mar 21, 2019", "day": "Thursday", "name": "Dhuleti", "image": "ic_salogo.png" },
-        { "id": 11, "date": "Mar 21, 2019", "day": "Thursday", "name": "Dhuleti", "image": "ic_salogo.png" },
-        { "id": 12, "date": "Mar 21, 2019", "day": "Thursday", "name": "Dhuleti", "image": "ic_salogo.png" },
-      ]
-    }
+      loading: true,
+      holidayList: []
+      }
   }
 
+  async componentDidMount(){
+    await AsyncStorage.getItem('accesstoken').then((token)=>{
+     apiManager.getHolidayList(token).then((res)=>{
+      if (res.status.toString() === "200") {
+        this.setState({holidayList:res.holidays,loading : false})
+        alert(JSON.stringify(res.holidays))
+      }else{
+        alert("error:  " + res.error);
+      }
+    })
+  })
+  }
+  
   rowItem = (item) => {
-    return (
-      <View style={styles.rowMainContainer}>
-        <Text style={styles.item} >{item.date + " (" + item.day + ")  "}</Text>
-        <View style={styles.rowImageContainer}>
-          <Image style={styles.holidayImage}
-            source={require('../../assets/ic_salogo.png')} />
-          <Text style={styles.hoildayText} lineBreakMode='tail'>{item.name}</Text>
+      return (
+        <View style={styles.rowMainContainer}>
+          <Text style={styles.item} >{item.date + " (" + item.day + ")  "}</Text>
+          <View style={styles.rowImageContainer}>
+          <Image source={{uri: item.image}} style={styles.holidayImage} />
+          <Text style={styles.hoildayText} lineBreakMode='tail'>{item.festivalname}</Text>
+          </View>
         </View>
-      </View>
-    )
-  }
+      )
+    }
+
   render() {
-    return (
-      <View style={styles.container}>
-        <Text style={styles.screenTitle}>{strings.lable_upcoming_holiday}</Text>
-        <FlatList
-          data={this.state.holidayList}
-          keyExtractor={item => item.id.toString()}
-          renderItem={({ item }) => this.rowItem(item)}
-        />
-      </View>
-    );
-  }
+     if(!this.state.loading){
+       return (
+        <View style={styles.container}>
+          <Text style={styles.screenTitle}>{strings.lable_upcoming_holiday}</Text>
+          <FlatList
+            data={this.state.holidayList}
+            keyExtractor={item => item._id.toString()}
+            renderItem={({ item }) => this.rowItem(item)}
+          />
+        </View>
+      );
+      }else{
+      return  <ActivityIndicator/>
+      }
+    }
 }
 
 const styles = StyleSheet.create({
@@ -95,3 +101,4 @@ const styles = StyleSheet.create({
 
   }
 })
+

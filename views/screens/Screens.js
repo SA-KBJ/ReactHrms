@@ -6,27 +6,33 @@ import Profile from '../profile/Profile'
 import MyLeave from '../leave/MyLeave'
 import LeaveDetails from '../leave/LeaveDetails'
 import NewLeave from '../leave/NewLeave'
+import LeaveSchedule from '../leave/LeaveSchedule'
 import Policy from '../policy/Policy'
 import Faq from '../faq/Faq'
 import DrawerContainer from '../drawer/DrawerContainer'
-
+import SignUp from '../signup/SignUp'
+import strings from '../../config/string'
+import Holidays from '../leave/UpcomingHoliday'
 import { Navigation } from 'react-native-navigation';
 
-function registerScreens(){
-    Navigation.registerComponent("hrms_splash",()=>Splash)
-    Navigation.registerComponent("hrms_home",()=>Home)
-    Navigation.registerComponent("hrms_login",()=>Login)
-    Navigation.registerComponent("hrms_forgotpassword",()=>ForgotPassword)
-    Navigation.registerComponent("hrms_profile",()=>Profile)
-    Navigation.registerComponent("hrms_myLeave",()=>MyLeave)
-    Navigation.registerComponent("hrms_leavedetails",()=>LeaveDetails)
-    Navigation.registerComponent("hrms_newleave",()=>NewLeave)
-    Navigation.registerComponent("hrms_policy",()=>Policy)
-    Navigation.registerComponent("hrms_faq",()=>Faq)
-    Navigation.registerComponent("hrms_drawercontainer",()=>DrawerContainer)
+function registerScreens() {
+    Navigation.registerComponent(strings.screen_splash, () => Splash)
+    Navigation.registerComponent(strings.screen_home, () => Home)
+    Navigation.registerComponent(strings.screen_login, () => Login)
+    Navigation.registerComponent(strings.screen_forgotpassword, () => ForgotPassword)
+    Navigation.registerComponent(strings.screen_profile, () => Profile)
+    Navigation.registerComponent(strings.screen_myleave, () => MyLeave)
+    Navigation.registerComponent(strings.screen_leave_detail, () => LeaveDetails)
+    Navigation.registerComponent(strings.screen_newleave, () => NewLeave)
+    Navigation.registerComponent(strings.action_leave_schedule, () => LeaveSchedule)
+    Navigation.registerComponent(strings.screen_policy, () => Policy)
+    Navigation.registerComponent(strings.screen_faq, () => Faq)
+    Navigation.registerComponent(strings.screen_drawer_container, () => DrawerContainer)
+    Navigation.registerComponent(strings.screen_signup, () => SignUp)
+    Navigation.registerComponent(strings.screen_holiday,()=>Holidays)
+
 
 }
 module.exports = {
     registerScreens
 };
-  
