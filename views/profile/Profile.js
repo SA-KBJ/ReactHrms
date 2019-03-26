@@ -7,6 +7,9 @@ import Icon from "react-native-vector-icons/Ionicons";
 import IconFontAwesome from "react-native-vector-icons/FontAwesome";
 import { FloatingAction } from 'react-native-floating-action';
 import goToPersonal from '../AppNavigator';
+import Toast, { DURATION } from 'react-native-easy-toast'
+
+
 class Profile extends React.Component {
 
     render() {
@@ -117,13 +120,20 @@ class Profile extends React.Component {
                     </View>
 
                 </ScrollView>
-            
+                <Toast ref="toast" />
+
                 <FloatingAction
                     actions={actions}
                     color={colors.colorPrimary}
                     onPressItem={
                         (name) => {
-                          console.log(`selected button: ${name}`);
+                            switch (name) {
+
+                                case string.label_personal:
+                                    this.refs.toast.show(name);
+                                    <goToPersonal />
+                                    break;
+                            }
                         }
                     }
                 />
@@ -138,37 +148,37 @@ const actions = [{
     name: string.label_personal,
     icon: require('./../../assets/user.png'),
     position: 1,
-    color:colors.colorPrimary,
-  }, {
+    color: colors.colorPrimary,
+}, {
     text: string.label_company,
     name: string.label_company,
     icon: require('./../../assets/company.png'),
     position: 2,
-    color:colors.colorPrimary
+    color: colors.colorPrimary
 
-  }, {
+}, {
     text: string.label_exprience,
     name: string.label_exprience,
     icon: require('./../../assets/exprience.png'),
     position: 3,
-    color:colors.colorPrimary
+    color: colors.colorPrimary
 
-  }, {
+}, {
     text: string.label_other,
     name: string.label_other,
     icon: require('./../../assets/other.png'),
     position: 4,
-    color:colors.colorPrimary
+    color: colors.colorPrimary
 
-  },
-  {
+},
+{
     text: string.label_family,
     name: string.label_family,
     icon: require('./../../assets/family.png'),
     position: 5,
-    color:colors.colorPrimary
+    color: colors.colorPrimary
 
-  }];
+}];
 
 
 const styles = StyleSheet.create({
@@ -180,7 +190,7 @@ const styles = StyleSheet.create({
         marginBottom: dimen.marginMedium
     },
     floatingActionButton: {
-        color:colors.colorPrimary
+        color: colors.colorPrimary
     },
     profileView: {
         height: '20%',
