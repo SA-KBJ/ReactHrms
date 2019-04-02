@@ -1,17 +1,35 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View, Image, ScrollView, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View, Image, ScrollView,BackHandler} from 'react-native';
 import colors from '../../config/colors';
 import dimen from '../../config/dimen';
 import string from '../../config/string';
 import Icon from "react-native-vector-icons/Ionicons";
 import IconFontAwesome from "react-native-vector-icons/FontAwesome";
 import { FloatingAction } from 'react-native-floating-action';
-import goToPersonal from '../AppNavigator';
+import { goToPersonal } from '../AppNavigator';
 import Toast, { DURATION } from 'react-native-easy-toast'
-
+import { Navigation } from "react-native-navigation"
 
 class Profile extends React.Component {
 
+    constructor(props) {
+        super(props)
+        Navigation.events().bindComponent(this);
+    }
+    componentDidMount() {
+        BackHandler.addEventListener('hardwareBackPress', this.handleBackPress);
+    }
+
+    componentWillUnmount() {
+        BackHandler.removeEventListener('hardwareBackPress', this.handleBackPress);
+        this.setMergeOprions();
+    }
+
+    handleBackPress = () => {
+        this.setMergeOprions();
+        Navigation.pop(this.props.componentId);
+        return true;
+    }
     render() {
         return (
             <View style={styles.container} >
@@ -135,8 +153,6 @@ class Profile extends React.Component {
                                     break;
 
                                 default:
-                                    this.refs.toast.show(name);
-                                    goToPersonal();
                                     break;
                             }
                         }

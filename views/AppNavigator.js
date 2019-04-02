@@ -131,7 +131,7 @@ export function startLeaveSchedule(){
 
 
 export const goToPersonal = () => {
-  Navigation.mergeOptions('profilestack', {
+  Navigation.mergeOptions('navigation_stack', {
     topBar: {
       title: {
         text: "Personal"
@@ -139,7 +139,7 @@ export const goToPersonal = () => {
 
     }
   });
-  Navigation.push('profilestack', {
+  Navigation.push('navigation_stack', {
     component: {
       id:strings.screen_personal,
       name: strings.screen_personal
