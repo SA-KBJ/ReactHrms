@@ -18,6 +18,10 @@ export default appString = {
   screen_drawer_container :"hrms_drawercontainer",
   screen_holiday :"hrms_holiday",
   screen_personal:"profile_personal",
+  screen_company:"profile_company",
+  screen_exprerience:"profile_exprerience",
+  screen_other:"profile_other",
+  screen_family:"profile_family",
 
   // Leave String
   lable_Multiple_leave: "Want to apply for Multiple Days Leaves?",

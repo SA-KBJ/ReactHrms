@@ -15,6 +15,12 @@ import strings from '../../config/string'
 import Holidays from '../leave/UpcomingHoliday'
 import { Navigation } from 'react-native-navigation';
 import Personal from '../profile/personal/Personal';
+import Comapany from '../profile/company/Company';
+import Experience from '../profile/experience/Experience';
+import Other from '../profile/other/Other';
+import Family from '../profile/family/Family';
+
+
 
 function registerScreens() {
     Navigation.registerComponent(strings.screen_splash, () => Splash)
@@ -32,6 +38,11 @@ function registerScreens() {
     Navigation.registerComponent(strings.screen_signup, () => SignUp)
     Navigation.registerComponent(strings.screen_holiday,()=>Holidays)
     Navigation.registerComponent(strings.screen_personal,()=>Personal)
+    Navigation.registerComponent(strings.screen_company,()=>Comapany)
+    Navigation.registerComponent(strings.screen_exprerience,()=>Experience)
+    Navigation.registerComponent(strings.screen_other,()=>Other)
+    Navigation.registerComponent(strings.screen_family,()=>Family)
+
 
 
 

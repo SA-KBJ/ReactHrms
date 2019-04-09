@@ -148,4 +148,82 @@ export const goToPersonal = () => {
   });
 }
 
+export const goToCompany = () => {
+  Navigation.mergeOptions('navigation_stack', {
+    topBar: {
+      title: {
+        text: "Company"
+      }
+
+    }
+  });
+  Navigation.push('navigation_stack', {
+    component: {
+      id:strings.screen_company,
+      name: strings.screen_company
+    }
+
+  });
+}
+
+
+
+export const goToExperience = () => {
+  Navigation.mergeOptions('navigation_stack', {
+    topBar: {
+      title: {
+        text: "Experience"
+      }
+
+    }
+  });
+  Navigation.push('navigation_stack', {
+    component: {
+      id:strings.screen_exprerience,
+      name: strings.screen_exprerience
+    }
+
+  });
+}
+
+
+export const goToOther = () => {
+  Navigation.mergeOptions('navigation_stack', {
+    topBar: {
+      title: {
+        text: "Other"
+      }
+
+    }
+  });
+  Navigation.push('navigation_stack', {
+    component: {
+      id:strings.screen_other,
+      name: strings.screen_other
+    }
+
+  });
+}
+
+
+export const goToFamily = () => {
+  Navigation.mergeOptions('navigation_stack', {
+    topBar: {
+      title: {
+        text: "Family"
+      }
+
+    }
+  });
+  Navigation.push('navigation_stack', {
+    component: {
+      id:strings.screen_family,
+      name: strings.screen_family
+    }
+
+  });
+}
+
+
+
 

@@ -1,9 +1,10 @@
-import React from 'react';
+import React,{Component} from 'react';
+import { Text } from 'react-native-elements';
 
-class Other extends React.Components {
+class Other extends Component {
     render() {
         return (
-            <h1>Other</h1>
+            <Text>Other</Text>
         );
     }
 }

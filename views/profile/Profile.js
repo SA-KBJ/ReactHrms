@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View, Image, ScrollView,BackHandler} from 'react-native';
+import { StyleSheet, Text, View, Image, ScrollView, BackHandler } from 'react-native';
 import colors from '../../config/colors';
 import dimen from '../../config/dimen';
 import string from '../../config/string';
 import Icon from "react-native-vector-icons/Ionicons";
 import IconFontAwesome from "react-native-vector-icons/FontAwesome";
 import { FloatingAction } from 'react-native-floating-action';
-import { goToPersonal } from '../AppNavigator';
+import { goToPersonal ,goToCompany,goToExperience,goToOther,goToFamily} from '../AppNavigator';
 import Toast, { DURATION } from 'react-native-easy-toast'
 import { Navigation } from "react-native-navigation"
 
@@ -29,6 +29,16 @@ class Profile extends React.Component {
         this.setMergeOprions();
         Navigation.pop(this.props.componentId);
         return true;
+    }
+
+    setMergeOprions = () => {
+        Navigation.mergeOptions('navigation_stack', {
+            topBar: {
+                title: {
+                    text: "Profile"
+                },
+            }
+        })
     }
     render() {
         return (
@@ -150,6 +160,28 @@ class Profile extends React.Component {
                                 case string.label_personal:
                                     this.refs.toast.show(name);
                                     goToPersonal();
+                                    break;
+
+                                case string.label_company:
+                                    this.refs.toast.show(name);
+                                    goToCompany();
+                                    break;
+
+                                case string.label_exprience:
+                                    this.refs.toast.show(name);
+                                    goToExperience();
+                                    break;
+
+
+                                case string.label_other:
+                                    this.refs.toast.show(name);
+                                    goToOther();
+                                    break;
+
+
+                                case string.label_family:
+                                    this.refs.toast.show(name);
+                                    goToFamily();
                                     break;
 
                                 default:
