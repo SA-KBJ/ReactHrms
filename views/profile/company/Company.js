@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Text,FlatList } from 'react-native';
+import { Text,FlatList,View } from 'react-native';
 
 class Company extends Component {
     constructor(props) {

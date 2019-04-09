@@ -1,5 +1,5 @@
 import React,{Component} from 'react';
-import { Text ,FlatList} from 'react-native';
+import { Text ,FlatList,View} from 'react-native';
 
 class Family extends Component {
     constructor(props) {
@@ -18,7 +18,7 @@ class Family extends Component {
             ]
         }
     }
-    rowFamilyListist = (item, index) => {
+    rowFamilyList = (item, index) => {
         return (
             <View >
                 <Text>{item.title}</Text>
@@ -31,7 +31,7 @@ class Family extends Component {
             <FlatList
                 data={this.state.familyList}
                 keyExtractor={item => item.id.toString()}
-                renderItem={({ item, index }) => this.rowFamilyListist(item, index)}
+                renderItem={({ item, index }) => this.rowFamilyList(item, index)}
             />
         );
     }
