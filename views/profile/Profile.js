@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View, Image, ScrollView, BackHandler } from 'react-native';
+import { StyleSheet, Text, View, Image, ScrollView, BackHandler,AsyncStorage } from 'react-native';
 import colors from '../../config/colors';
 import dimen from '../../config/dimen';
 import string from '../../config/string';
@@ -9,6 +9,7 @@ import { FloatingAction } from 'react-native-floating-action';
 import { goToPersonal ,goToCompany,goToExperience,goToOther,goToFamily} from '../AppNavigator';
 import Toast, { DURATION } from 'react-native-easy-toast'
 import { Navigation } from "react-native-navigation"
+import apiManager from '../../services/apimanager'
 
 class Profile extends React.Component {
 
@@ -16,14 +17,27 @@ class Profile extends React.Component {
         super(props)
         Navigation.events().bindComponent(this);
     }
-    componentDidMount() {
+   async componentDidMount() {
         BackHandler.addEventListener('hardwareBackPress', this.handleBackPress);
+        await AsyncStorage.getItem('accesstoken').then((token)=>{
+            apiManager.getProfileDetails(token).then((res)=>{
+             if (res.status.toString() === "200") {
+                 console.log("res")
+               alert(JSON.stringify(res.toString()))
+             }else{
+                console.log("res error")
+               alert("error:  " + res.error);
+             }
+           })
+         })
     }
 
     componentWillUnmount() {
         BackHandler.removeEventListener('hardwareBackPress', this.handleBackPress);
         this.setMergeOprions();
     }
+
+   
 
     handleBackPress = () => {
         this.setMergeOprions();

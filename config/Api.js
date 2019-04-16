@@ -4,7 +4,8 @@ const ApiConfig ={
     LoginApi : "/auth/login",
     RegisterApi :"/auth/register",
     ForgotPasswordApi: "/auth/forgotpassword",
-    HolidayListApi: "/holidays/getallholiday"
+    HolidayListApi: "/holidays/getallholiday",
+    ProfileDetailsApi:"/api/v1/user/getalluser"
 
 }
 

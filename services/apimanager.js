@@ -17,6 +17,20 @@ export default{
          console.log(e)
        }
     },
+    async getProfileDetails(token)  {
+      try {
+          const res = await fetch(apiconfig.Base_url + apiconfig.ProfileDetailsApi, {
+          method: 'GET',
+          headers: {
+              'Content-Type': 'application/x-www-form-urlencoded',
+              'Authorization':token
+          },
+       });
+         return await res.json();
+      } catch(e) {
+       console.log(e)
+     }
+  },
     async login(email,password)  {
         try {
             const res = await fetch(apiconfig.Base_url + apiconfig.LoginApi, {
