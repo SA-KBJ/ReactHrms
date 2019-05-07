@@ -1,6 +1,7 @@
-import React,{Component} from 'react';
-import { Text,FlatList,View } from 'react-native';
-
+import React, { Component } from 'react';
+import { Text, FlatList} from 'react-native';
+import { Card } from 'react-native-elements'
+import comman from '../../../style/comman'
 class Experience extends Component {
     constructor(props) {
         super(props);
@@ -20,10 +21,10 @@ class Experience extends Component {
     }
     rowExperienceListist = (item, index) => {
         return (
-            <View >
-                <Text>{item.title}</Text>
-                <Text>{item.value}</Text>
-            </View>
+            <Card containerStyle={comman.cardView}>
+                <Text style={comman.headerTextView}>{item.title}</Text>
+                <Text style={comman.subHeaderTextView}>{item.value}</Text>
+            </Card >
         )
     }
     render() {
@@ -36,4 +37,5 @@ class Experience extends Component {
         );
     }
 }
+
 export default Experience;

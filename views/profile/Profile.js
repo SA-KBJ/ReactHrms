@@ -162,7 +162,7 @@ class Profile extends React.Component {
                     </View>
 
                 </ScrollView>
-                <Toast ref="toast" />
+                {/* <Toast ref="toast" /> */}
 
                 <FloatingAction
                     actions={actions}
@@ -172,29 +172,29 @@ class Profile extends React.Component {
                             switch (name) {
 
                                 case string.label_personal:
-                                    this.refs.toast.show(name);
+                                    // this.refs.toast.show(name);
                                     goToPersonal();
                                     break;
 
                                 case string.label_company:
-                                    this.refs.toast.show(name);
+                                    // this.refs.toast.show(name);
                                     goToCompany();
                                     break;
 
                                 case string.label_exprience:
-                                    this.refs.toast.show(name);
+                                    // this.refs.toast.show(name);
                                     goToExperience();
                                     break;
 
 
                                 case string.label_other:
-                                    this.refs.toast.show(name);
+                                    // this.refs.toast.show(name);
                                     goToOther();
                                     break;
 
 
                                 case string.label_family:
-                                    this.refs.toast.show(name);
+                                    // this.refs.toast.show(name);
                                     goToFamily();
                                     break;
 

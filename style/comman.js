@@ -83,13 +83,13 @@ const baseStyles = StyleSheet.create({
     alignItems: 'center',
   },
   buttonstyle: {
-    width:'100%',
+    width: '100%',
     alignItems: 'stretch',
-    marginTop:dimen.marginSmall,
-    marginBottom:dimen.marginSmall,
-    backgroundColor:colors.colorPrimary,
+    marginTop: dimen.marginSmall,
+    marginBottom: dimen.marginSmall,
+    backgroundColor: colors.colorPrimary,
   },
-   
+
   commonInputStyle: {
     alignSelf: 'center',
     justifyContent: 'center',
@@ -98,6 +98,21 @@ const baseStyles = StyleSheet.create({
     flex: 1,
     minHeight: 40,
   },
+  headerTextView: {
+    marginStart: dimen.marginTiny,
+    marginEnd: dimen.marginTiny,
+    color: colors.textTitleGray,
+    fontSize: dimen.textMedium,
+
+  },
+  subHeaderTextView: {
+    marginStart: dimen.marginTiny,
+    marginEnd: dimen.marginTiny
+  },
+  cardView: {
+    backgroundColor: colors.cardGray
+
+  }
 })
 
 export default baseStyles;
